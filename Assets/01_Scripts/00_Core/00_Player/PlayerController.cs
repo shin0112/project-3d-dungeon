@@ -12,7 +12,15 @@ public class PlayerController : MonoBehaviour
     private bool _canJump;
     private bool _canDoubleJump;
 
-    // component
+    [Header("Look")]
+    [SerializeField] private Transform _cameraContainer;
+    [SerializeField] private float _minXLook;
+    [SerializeField] private float _maxXLook;
+    [SerializeField] private float _lookSensitivity;
+    private float _currentCameraXRotation;
+    private Vector2 _mouseDelta;
+
+    // component cache
     private Rigidbody _rigidbody;
 
     private void Awake()
@@ -27,20 +35,12 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
-    #region 플레이어 행동 로직
-    public void Move()
+    private void LateUpdate()
     {
-        Vector3 direction =
-            transform.forward * _currentMovementInput.y +
-            transform.right * _currentMovementInput.x;
-        direction *= _moveSpeed;
-        direction.y = _rigidbody.velocity.y;
-
-        _rigidbody.velocity = direction;
+        Look();
     }
-    #endregion
 
-    #region 플레이어 행동 입력
+    #region 플레이어 움직임(Movement)
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -73,7 +73,17 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-    #endregion
+
+    private void Move()
+    {
+        Vector3 direction =
+            transform.forward * _currentMovementInput.y +
+            transform.right * _currentMovementInput.x;
+        direction *= _moveSpeed;
+        direction.y = _rigidbody.velocity.y;
+
+        _rigidbody.velocity = direction;
+    }
 
     private void CheckGround()
     {
@@ -89,8 +99,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(ray, 0.1f, _groundLayerMask))
             {
-                _canJump = true;
-                _canDoubleJump = true;
+                ResetJumpFlags();
                 return;
             }
         }
@@ -103,4 +112,21 @@ public class PlayerController : MonoBehaviour
         _canJump = true;
         _canDoubleJump = true;
     }
+    #endregion
+
+    #region 플레이어 화면(Look)
+    public void OnLookInput(InputAction.CallbackContext context)
+    {
+        _mouseDelta = context.ReadValue<Vector2>();
+    }
+
+    public void Look()
+    {
+        _currentCameraXRotation += _mouseDelta.y * _lookSensitivity;
+        _currentCameraXRotation = Mathf.Clamp(_currentCameraXRotation, _minXLook, _maxXLook);
+        _cameraContainer.localEulerAngles = new Vector3(-_currentCameraXRotation, 0, 0);
+
+        transform.eulerAngles += new Vector3(0, _mouseDelta.x * _lookSensitivity, 0);
+    }
+    #endregion
 }

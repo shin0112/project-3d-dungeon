@@ -150,7 +150,19 @@ MonoBehaviour:
     m_ActionId: be5e4e8d-7354-40f5-88b2-7ecca13b93e8
     m_ActionName: Player/Interact[/Keyboard/e]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1391152533685260191}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnLookInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d1670e8e-875d-43bf-b23b-ab9073cabee7
     m_ActionName: Player/Look[/Mouse/delta]
   m_NeverAutoSwitchControlSchemes: 0
@@ -187,6 +199,10 @@ MonoBehaviour:
   _groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  _cameraContainer: {fileID: 1297580711683585687}
+  _minXLook: -90
+  _maxXLook: 90
+  _lookSensitivity: 0.1
 --- !u!114 &5443407617823012788
 MonoBehaviour:
   m_ObjectHideFlags: 0
