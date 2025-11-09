@@ -11,18 +11,22 @@ public class Stat
         MaxValue = max;
     }
 
-    public void AddValue(float value)
+    public Stat AddValue(float value)
     {
         float minValue = Mathf.Min(Value + value, MaxValue);
         Logger.Log($"값 변경 {Value} ▶ {minValue}");
         Value = minValue;
+
+        return this;
     }
 
-    public void SubstactValue(float value)
+    public Stat SubstactValue(float value)
     {
         float maxValue = Mathf.Max(Value - value, 0);
         Logger.Log($"값 변경 {Value} ▶ {maxValue}");
         Value = maxValue;
+
+        return this;
     }
 }
 
@@ -30,14 +34,34 @@ public class Stat
 public class PlayerCondition : MonoBehaviour
 {
     #region 변수
-    private Stat _hp;
+    private Stat _health;
     private Stat _stamina;
+
+    public Stat Health
+    {
+        get { return _health; }
+        set
+        {
+            _health = value;
+            UIManager.Instance.OnHealthChanged?.Invoke(_health);
+        }
+    }
     #endregion
 
     private void Awake()
     {
         // todo: 값 저장해서 불러오기
-        _hp = new Stat(100, 100);
+        _health = new Stat(100, 100);
         _stamina = new Stat(300, 300);
+    }
+
+    public void Heal(float value)
+    {
+        Health = _health.AddValue(value);
+    }
+
+    public void Damage(float value)
+    {
+        Health = _health.SubstactValue(value);
     }
 }

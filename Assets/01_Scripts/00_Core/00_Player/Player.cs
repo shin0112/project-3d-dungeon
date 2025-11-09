@@ -10,4 +10,14 @@ public class Player : MonoBehaviour
         _controller = GetComponent<PlayerController>();
         _condition = GetComponent<PlayerCondition>();
     }
+
+    private void Update()
+    {
+        Damage(1f);
+    }
+
+    #region 플레이어 상태 변경
+    public void Heal(float value) => _condition.Heal(value);
+    public void Damage(float value) => _condition.Damage(value);
+    #endregion
 }
