@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [Header("Player UI")]
     [SerializeField] private PlayerConditionUI _playerCondition;
     [SerializeField] private PromptUI _prompt;
+    [SerializeField] private InventoryUI _inventory;
 
     private bool _isHall = true;
 
@@ -36,6 +37,12 @@ public class UIManager : MonoBehaviour
         {
             Logger.Log("prompt ui is null");
             _prompt = GetComponentInChildren<PromptUI>();
+        }
+
+        if (_inventory == null)
+        {
+            Logger.Log("inventory ui is null");
+            _inventory = GetComponentInChildren<InventoryUI>();
         }
 
         SetPlayerConditionActions();
