@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PlayerConditionUI _playerCondition;
     [SerializeField] private PromptUI _prompt;
 
+    private bool _isHall = true;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -58,12 +60,12 @@ public class UIManager : MonoBehaviour
     private void SetPromptAction()
     {
         OnPromptChanged += HandleOnPromptChanged;
-        OnEndInteraction += () => _prompt.gameObject.SetActive(false);
+        OnEndInteraction += () => _prompt.SetActiveText(false);
     }
 
     private void HandleOnPromptChanged(string name, string description)
     {
-        _prompt.gameObject.SetActive(true);
+        _prompt.SetActiveText(true);
         _prompt.UpdateText(name, description);
     }
     #endregion
