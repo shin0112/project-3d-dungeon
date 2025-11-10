@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        Damage(1f);
     }
 
     #region 플레이어 상태 변경

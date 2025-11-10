@@ -24,14 +24,16 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        if (_playerCondition == null && !TryGetComponent<PlayerConditionUI>(out _playerCondition))
+        if (_playerCondition == null)
         {
             Logger.Log("player condition ui is null");
+            _playerCondition = GetComponentInChildren<PlayerConditionUI>();
         }
 
-        if (_prompt == null && !TryGetComponent(out _prompt))
+        if (_prompt == null)
         {
             Logger.Log("prompt ui is null");
+            _prompt = GetComponentInChildren<PromptUI>();
         }
 
         SetPlayerConditionActions();

@@ -38,12 +38,12 @@ public class Interaction : MonoBehaviour
                     _curInteratable = hit.collider.GetComponent<IInteractable>();
                     SetPromptUI();
                 }
-                else
-                {
-                    _curInteractGameObject = null;
-                    _curInteratable = null;
-                    UIManager.Instance.OnEndInteraction?.Invoke();
-                }
+            }
+            else
+            {
+                _curInteractGameObject = null;
+                _curInteratable = null;
+                UIManager.Instance.OnEndInteraction?.Invoke();
             }
         }
     }
