@@ -51,10 +51,18 @@ public class UIManager : MonoBehaviour
 
     #region 플레이어 상호작용 UI
     public Action<string, string> OnPromptChanged;
+    public Action OnEndInteraction;
 
     private void SetPromptAction()
     {
-        OnPromptChanged += _prompt.UpdateText;
+        OnPromptChanged += HandleOnPromptChanged;
+        OnEndInteraction += () => _prompt.gameObject.SetActive(false);
+    }
+
+    private void HandleOnPromptChanged(string name, string description)
+    {
+        _prompt.gameObject.SetActive(true);
+        _prompt.UpdateText(name, description);
     }
     #endregion
 }

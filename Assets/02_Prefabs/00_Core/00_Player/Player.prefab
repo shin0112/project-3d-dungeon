@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7991486164084202132}
   - component: {fileID: 1391152533685260191}
   - component: {fileID: 5443407617823012788}
+  - component: {fileID: 5323079301158130500}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -146,7 +147,19 @@ MonoBehaviour:
     m_ActionId: d5016986-6078-47d3-93f0-41808b01aeae
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5323079301158130500}
+        m_TargetAssemblyTypeName: Interaction, Assembly-CSharp
+        m_MethodName: OnInteractInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: be5e4e8d-7354-40f5-88b2-7ecca13b93e8
     m_ActionName: Player/Interact[/Keyboard/e]
   - m_PersistentCalls:
@@ -215,6 +228,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a0b91b92f18024884c25a06605afca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5323079301158130500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7561232861642733778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75bc8631426d1d3429a460acd0187628, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _checkRate: 0.05
+  _maxCheckDistance: 3
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _curInteractGameObject: {fileID: 0}
 --- !u!1 &8518697832811759079
 GameObject:
   m_ObjectHideFlags: 0
