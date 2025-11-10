@@ -160,6 +160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7effbcf9cfe993a4a851f1b7779417b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _layerMask:
+  _groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  _playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 256

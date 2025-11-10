@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class BuffItemController : MonoBehaviour
 {
-    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private LayerMask _groundLayerMask;
+    [SerializeField] private LayerMask _playerLayerMask;
 
     private Rigidbody _rigidbody;
 
@@ -13,9 +14,13 @@ public class BuffItemController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (((1 << collision.gameObject.layer) & _layerMask) != 0)
+        if (((1 << collision.gameObject.layer) & _groundLayerMask) != 0)
         {
             AutoJump();
+        }
+        else if (((1 << collision.gameObject.layer & _playerLayerMask) != 0))
+        {
+
         }
     }
 
