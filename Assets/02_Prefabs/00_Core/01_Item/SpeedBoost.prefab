@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8626866237463815302}
   - component: {fileID: 4234352766743080173}
   - component: {fileID: 1308788805027329516}
-  - component: {fileID: 4629718559619191521}
+  - component: {fileID: 539683145979319567}
   - component: {fileID: 8130304674016831717}
   - component: {fileID: 1944560230686874398}
   - component: {fileID: 7717907877777135818}
@@ -87,8 +87,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4629718559619191521
-BoxCollider:
+--- !u!135 &539683145979319567
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -106,7 +106,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+  m_Radius: 0.49999997
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &8130304674016831717
 Rigidbody:
@@ -133,7 +133,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 10
   m_CollisionDetection: 0
 --- !u!114 &1944560230686874398
 MonoBehaviour:
@@ -163,3 +163,4 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 64
+  _buffItemJumpPower: 5
