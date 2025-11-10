@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpPower;
     [SerializeField] private LayerMask _groundLayerMask;
-    private Vector2 _currentMovementInput;
+    private Vector2 _curMovementInput;
 
     private bool _canJump;
     private bool _canDoubleJump;
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _minXLook;
     [SerializeField] private float _maxXLook;
     [SerializeField] private float _lookSensitivity;
-    private float _currentCameraXRotation;
+    private float _curCameraXRotation;
     private Vector2 _mouseDelta;
 
     // component cache
@@ -45,11 +45,11 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            _currentMovementInput = context.ReadValue<Vector2>();
+            _curMovementInput = context.ReadValue<Vector2>();
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
-            _currentMovementInput = Vector2.zero;
+            _curMovementInput = Vector2.zero;
         }
     }
 
@@ -77,8 +77,8 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         Vector3 direction =
-            transform.forward * _currentMovementInput.y +
-            transform.right * _currentMovementInput.x;
+            transform.forward * _curMovementInput.y +
+            transform.right * _curMovementInput.x;
         direction *= _moveSpeed;
         direction.y = _rigidbody.velocity.y;
 
@@ -122,9 +122,9 @@ public class PlayerController : MonoBehaviour
 
     public void Look()
     {
-        _currentCameraXRotation += _mouseDelta.y * _lookSensitivity;
-        _currentCameraXRotation = Mathf.Clamp(_currentCameraXRotation, _minXLook, _maxXLook);
-        _cameraContainer.localEulerAngles = new Vector3(-_currentCameraXRotation, 0, 0);
+        _curCameraXRotation += _mouseDelta.y * _lookSensitivity;
+        _curCameraXRotation = Mathf.Clamp(_curCameraXRotation, _minXLook, _maxXLook);
+        _cameraContainer.localEulerAngles = new Vector3(-_curCameraXRotation, 0, 0);
 
         transform.eulerAngles += new Vector3(0, _mouseDelta.x * _lookSensitivity, 0);
     }
