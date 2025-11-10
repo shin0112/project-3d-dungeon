@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private static GameManager _instance;
+    public static GameManager Instance => _instance;
+
+    [SerializeField] private Player _player;
+    public Player Player => _player;
+
+    private void Awake()
     {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 }

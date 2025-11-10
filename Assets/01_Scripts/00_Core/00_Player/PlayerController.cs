@@ -74,6 +74,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void SuperJump(float superJumpPower)
+    {
+        Logger.Log("슈퍼 점프");
+        _rigidbody.AddForce(Vector2.up * superJumpPower, ForceMode.Impulse);
+    }
+
     private void Move()
     {
         Vector3 direction =
