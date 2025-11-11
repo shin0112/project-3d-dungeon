@@ -25,8 +25,8 @@ public class UIManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         GetComponents();
 
-        SetPlayerConditionActions();
-        SetPromptAction();
+        AddPlayerConditionActions();
+        AddPromptActions();
     }
 
     private void GetComponents()
@@ -50,14 +50,26 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        RemovePlayerConditionActions();
+        RemovePromptActions();
+    }
+
     #region 플레이어 상태 UI
     public Action<Stat> OnHealthChanged;
     public Action<Stat> OnStaminaChanged;
 
-    private void SetPlayerConditionActions()
+    private void AddPlayerConditionActions()
     {
         OnHealthChanged += _playerCondition.UpdateHealthBar;
         OnStaminaChanged += _playerCondition.UpdateStaminaBar;
+    }
+
+    private void RemovePlayerConditionActions()
+    {
+        OnHealthChanged -= _playerCondition.UpdateHealthBar;
+        OnStaminaChanged -= _playerCondition.UpdateStaminaBar;
     }
     #endregion
 
@@ -65,16 +77,27 @@ public class UIManager : MonoBehaviour
     public Action<string, string> OnPromptChanged;
     public Action OnEndInteraction;
 
-    private void SetPromptAction()
+    private void AddPromptActions()
     {
-        OnPromptChanged += HandleOnPromptChanged;
-        OnEndInteraction += () => _prompt.SetActiveText(false);
+        OnPromptChanged += HandlePromptChanged;
+        OnEndInteraction += HandlePromptEndInteraction;
     }
 
-    private void HandleOnPromptChanged(string name, string description)
+    private void RemovePromptActions()
+    {
+        OnPromptChanged -= HandlePromptChanged;
+        OnEndInteraction -= HandlePromptEndInteraction;
+    }
+
+    private void HandlePromptChanged(string name, string description)
     {
         _prompt.SetActiveText(true);
         _prompt.UpdateText(name, description);
+    }
+
+    private void HandlePromptEndInteraction()
+    {
+        _prompt.SetActiveText(false);
     }
     #endregion
 }
