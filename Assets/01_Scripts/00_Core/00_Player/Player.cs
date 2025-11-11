@@ -14,10 +14,6 @@ public class Player : MonoBehaviour
         _condition = GetComponent<PlayerCondition>();
     }
 
-    private void Update()
-    {
-    }
-
     #region 플레이어 상태 변경
     public void Heal(float value) => _condition.Heal(value);
     public void Damage(float value) => _condition.Damage(value);

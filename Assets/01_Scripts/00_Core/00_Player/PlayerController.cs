@@ -5,12 +5,15 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _dashMoveSpeed;
     [SerializeField] private float _jumpPower;
     [SerializeField] private LayerMask _groundLayerMask;
     private Vector2 _curMovementInput;
 
-    private bool _canJump;
-    private bool _canDoubleJump;
+    private bool _isDash = false;
+    private bool _doesSpendStamina = true;
+    private bool _canJump = true;
+    private bool _canDoubleJump = true;
 
     [Header("Look")]
     [SerializeField] private Transform _cameraContainer;
@@ -26,8 +29,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-
-        ResetJumpFlags();
     }
 
     private void FixedUpdate()
@@ -74,6 +75,20 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void OnDashInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            Logger.Log("대시 시작");
+            _isDash = true;
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            Logger.Log("대시 취소");
+            _isDash = false;
+        }
+    }
+
     public void SuperJump(float superJumpPower)
     {
         Logger.Log("슈퍼 점프");
@@ -85,7 +100,7 @@ public class PlayerController : MonoBehaviour
         Vector3 direction =
             transform.forward * _curMovementInput.y +
             transform.right * _curMovementInput.x;
-        direction *= _moveSpeed;
+        direction *= (_isDash ? _dashMoveSpeed : _moveSpeed);
         direction.y = _rigidbody.velocity.y;
 
         _rigidbody.velocity = direction;
