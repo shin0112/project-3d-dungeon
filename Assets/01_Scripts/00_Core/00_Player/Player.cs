@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -7,6 +8,11 @@ public class Player : MonoBehaviour
 
     public PlayerController PlayerController => _controller;
     public PlayerCondition PlayerCondition => _condition;
+
+    [Header("Item")]
+    [SerializeField] private Transform _dropPosition;
+    public ItemData ItemData { get; set; }
+    public Action AddItem;
 
     private void Awake()
     {

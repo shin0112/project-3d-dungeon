@@ -16,4 +16,13 @@ public class ItemSlot : MonoBehaviour
     {
         _outline = GetComponent<Outline>();
     }
+
+    public void SetItemSlot(ItemData item)
+    {
+        _item = item;
+        if (item.Type == ItemType.Equipment)
+        {
+            _icon.sprite = item.Icon;
+        }
+    }
 }

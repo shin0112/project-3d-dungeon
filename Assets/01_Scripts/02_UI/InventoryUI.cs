@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,21 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Button _arrowButton;
     [SerializeField] private Image _arrowButtonImg;
 
+    [Header("Item Data")]
+    private ItemSlot[] _slots;
+
+    [Header("Buff Item Info")]
+    private ItemSlot _buffitem;
+
+    [Header("Selected Item Info")]
+    private ItemSlot _selectedItem;
+    private int _selectedItemIndex;
+    [SerializeField] private TextMeshProUGUI _seleectedItemName;
+    [SerializeField] private TextMeshProUGUI _seleectedItemDescription;
+
+    private PlayerController _controller;
+    private PlayerCondition _condition;
+
     private void Awake()
     {
         if (TryGetComponent(out _rectTransform)) Logger.Log("rect transform is null");
@@ -25,11 +41,18 @@ public class InventoryUI : MonoBehaviour
         _arrowButton.onClick.AddListener(ToggleInventory);
     }
 
+    private void Start()
+    {
+        _condition = GameManager.Instance.Player.PlayerCondition;
+        _controller = GameManager.Instance.Player.PlayerController;
+    }
+
     private void OnDisable()
     {
         _arrowButton.onClick.RemoveAllListeners();
     }
 
+    #region 인벤토리 창 세팅
     private void ToggleInventory()
     {
         Logger.Log("버튼 클릭");
@@ -71,4 +94,14 @@ public class InventoryUI : MonoBehaviour
 
         _isClosed = !_isClosed;
     }
+    #endregion
+
+    #region 인벤토리 슬롯 세팅
+
+    private void AddBuffItem()
+    {
+        ItemData item = GameManager.Instance.Player.ItemData;
+        _buffitem.SetItemSlot(item);
+    }
+    #endregion
 }
