@@ -12,10 +12,33 @@ public class Player : MonoBehaviour
     {
         _controller = GetComponent<PlayerController>();
         _condition = GetComponent<PlayerCondition>();
+
+        EnrollActions();
+    }
+
+    private void OnDestroy()
+    {
+        DeleteActions();
+    }
+
+    private void EnrollActions()
+    {
+        _controller.OnDash += Actions;
+    }
+
+    private void DeleteActions()
+    {
+        _controller.OnDash -= Actions;
+    }
+
+    private void Actions()
+    {
+        _condition.UseStamina(Time.deltaTime / Define.DashStaminaValue);
     }
 
     #region 플레이어 상태 변경
     public void Heal(float value) => _condition.Heal(value);
+
     public void Damage(float value) => _condition.Damage(value);
     #endregion
 }

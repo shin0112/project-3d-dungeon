@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 _curMovementInput;
 
     private bool _isDash = false;
+    public bool IsDash => _isDash;
+    public Action OnDash;
     private bool _doesSpendStamina = true;
     private bool _canJump = true;
     private bool _canDoubleJump = true;
@@ -29,6 +32,11 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        if (IsDash) OnDash?.Invoke();
     }
 
     private void FixedUpdate()
