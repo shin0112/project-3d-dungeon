@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-[System.Serializable]
 public class Stat
 {
     public float Value { get; private set; }
@@ -65,10 +64,5 @@ public class PlayerCondition : MonoBehaviour
     public void UseStamina(float valuae)
     {
         _stamina.SubstactValue(valuae);
-    }
-
-    internal void UseStamina(object dashStaminaValue)
-    {
-        throw new NotImplementedException();
     }
 }
