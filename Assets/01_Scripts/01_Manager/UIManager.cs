@@ -23,9 +23,13 @@ public class UIManager : MonoBehaviour
 
         _instance = this;
         DontDestroyOnLoad(gameObject);
+        GetComponents();
+
+        SetPlayerConditionActions();
+        SetPromptAction();
     }
 
-    private void Start()
+    private void GetComponents()
     {
         if (_playerCondition == null)
         {
@@ -44,9 +48,6 @@ public class UIManager : MonoBehaviour
             Logger.Log("inventory ui is null");
             _inventory = GetComponentInChildren<InventoryUI>();
         }
-
-        SetPlayerConditionActions();
-        SetPromptAction();
     }
 
     #region 플레이어 상태 UI
