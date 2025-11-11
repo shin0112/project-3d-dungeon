@@ -19,4 +19,6 @@ MonoBehaviour:
   _icon: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   _dropPrefab: {fileID: 7400147142695229796, guid: 66718bd2b8928b94f8d9e6214a4f6abb, type: 3}
   _color: {r: 1, g: 0, b: 0, a: 0}
+  _consumableType: 2
   _consumables: []
+  _equipmentType: 0

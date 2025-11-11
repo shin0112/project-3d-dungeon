@@ -8,8 +8,18 @@ public enum ItemType
 
 public enum ConsumableType
 {
+    None,
     Health,
     Buff
+}
+
+public enum EquipmentType
+{
+    None,
+    Hand,
+    Hat,
+    Top,
+    Shoes
 }
 
 [System.Serializable]
@@ -31,8 +41,15 @@ public class ItemData : ScriptableObject
     [SerializeField] private Color _color;
     public string Name { get { return _name; } }
     public string Description { get { return _description; } }
+    public ItemType Type { get { return _type; } }
     public Color Color { get { return _color; } }
 
     [Header("Consumable")]
-    [SerializeField] ItemDataConsumable[] _consumables;
+    [SerializeField] private ConsumableType _consumableType;
+    [SerializeField] private ItemDataConsumable[] _consumables;
+    public ConsumableType ConsumableType { get { return _consumableType; } }
+
+    [Header("Equipment")]
+    [SerializeField] private EquipmentType _equipmentType;
+    public EquipmentType EquipmentType { get { return _equipmentType; } }
 }
