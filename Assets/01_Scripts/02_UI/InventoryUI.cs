@@ -43,8 +43,13 @@ public class InventoryUI : MonoBehaviour
 
     private void Start()
     {
-        _condition = GameManager.Instance.Player.PlayerCondition;
-        _controller = GameManager.Instance.Player.PlayerController;
+        Player player = GameManager.Instance.Player;
+
+        _condition = player.PlayerCondition;
+        _controller = player.PlayerController;
+
+        player.AddBuffItem += AddBuffItem;
+        player.UseBuffItem += UserBuffItem;
     }
 
     private void OnDisable()
@@ -97,11 +102,21 @@ public class InventoryUI : MonoBehaviour
     #endregion
 
     #region 인벤토리 슬롯 세팅
-
+    /// <summary>
+    /// 버프 아이템 슬롯 채우기
+    /// </summary>
     private void AddBuffItem()
     {
         ItemData item = GameManager.Instance.Player.ItemData;
         _buffitem.SetItemSlot(item);
+    }
+
+    /// <summary>
+    /// 버프 아이템 사용하기
+    /// </summary>
+    private void UserBuffItem()
+    {
+
     }
     #endregion
 }
