@@ -23,17 +23,21 @@ public class Player : MonoBehaviour
 
     private void EnrollActions()
     {
-        _controller.OnDash += Actions;
+        _controller.OnDash += HandleDash;
     }
 
     private void DeleteActions()
     {
-        _controller.OnDash -= Actions;
+        _controller.OnDash -= HandleDash;
     }
 
-    private void Actions()
+    private void HandleDash()
     {
-        _condition.UseStamina(Time.deltaTime / Define.DashStaminaValue);
+        _controller.CanSpendStamina = _condition.CurStamina > 0;
+        if (_controller.CanSpendStamina)
+        {
+            _condition.UseStamina(Time.deltaTime / Define.DashStaminaValue);
+        }
     }
 
     #region 플레이어 상태 변경

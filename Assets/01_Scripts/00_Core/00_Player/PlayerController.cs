@@ -11,10 +11,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask _groundLayerMask;
     private Vector2 _curMovementInput;
 
+    // Dash
     private bool _isDash = false;
     public bool IsDash => _isDash;
     public Action OnDash;
-    private bool _doesSpendStamina = true;
+
+    // Stmina
+    public bool CanSpendStamina { get; set; }
+
+    // Jump
     private bool _canJump = true;
     private bool _canDoubleJump = true;
 
@@ -108,7 +113,9 @@ public class PlayerController : MonoBehaviour
         Vector3 direction =
             transform.forward * _curMovementInput.y +
             transform.right * _curMovementInput.x;
-        direction *= (_isDash ? _dashMoveSpeed : _moveSpeed);
+        float speed = (_isDash && CanSpendStamina ? _dashMoveSpeed : _moveSpeed);
+        Logger.Log($"speed: {speed}");
+        direction *= speed;
         direction.y = _rigidbody.velocity.y;
 
         _rigidbody.velocity = direction;
