@@ -42,6 +42,7 @@ public class PlayerCondition : MonoBehaviour
 
     public float CurHealth => _health.Value;
     public float CurStamina => _stamina.Value;
+    public bool BlockSpendStamina { get; set; } = false;
     #endregion
 
     private void Start()
@@ -68,6 +69,6 @@ public class PlayerCondition : MonoBehaviour
 
     public void UseStamina(float valuae)
     {
-        _stamina.SubstactValue(valuae);
+        if (!BlockSpendStamina) _stamina.SubstactValue(valuae);
     }
 }

@@ -1,18 +1,21 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedBoost : MonoBehaviour
+public class SpeedBoost : MonoBehaviour, IConsumable
 {
-    // Start is called before the first frame update
-    void Start()
+    private WaitForSeconds _duration = new WaitForSeconds(Define.Item_Buff_Duration_SpeedBoost);
+
+    public void ApplyEffect()
     {
-        
+        var pc = GameManager.Instance.Player.PlayerCondition;
+
+        StartCoroutine(StaminaBoostCoroutine(pc));
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator StaminaBoostCoroutine(PlayerCondition playerCondition)
     {
-        
+        playerCondition.BlockSpendStamina = true;
+        yield return _duration;
+        playerCondition.BlockSpendStamina = false;
     }
 }
