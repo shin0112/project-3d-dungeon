@@ -51,6 +51,11 @@ public class PlayerCondition : MonoBehaviour
         _stamina = new Stat(300, 300, UIManager.Instance.OnStaminaChanged);
     }
 
+    private void Update()
+    {
+        _stamina.AddValue(Time.deltaTime * Define.Player_Stamina_AutoRecoveryRate);
+    }
+
     public void Heal(float value)
     {
         _health.AddValue(value);
