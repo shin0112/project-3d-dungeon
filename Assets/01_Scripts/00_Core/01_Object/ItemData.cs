@@ -39,10 +39,11 @@ public class ItemData : ScriptableObject
     [SerializeField] private Sprite _icon;
     [SerializeField] private GameObject _dropPrefab;
     [SerializeField] private Color _color;
-    public string Name { get { return _name; } }
-    public string Description { get { return _description; } }
-    public ItemType Type { get { return _type; } }
-    public Color Color { get { return _color; } }
+    public string Name => _name;
+    public string Description => _description;
+    public ItemType Type => _type;
+    public Sprite Icon => _icon;
+    public Color Color => _color;
 
     [Header("Consumable")]
     [SerializeField] private ConsumableType _consumableType;
