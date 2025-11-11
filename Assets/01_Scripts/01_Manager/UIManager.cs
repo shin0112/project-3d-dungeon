@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PlayerConditionUI _playerCondition;
     [SerializeField] private PromptUI _prompt;
     [SerializeField] private InventoryUI _inventory;
+    public InventoryUI Inventory => _inventory;
 
     private bool _isHall = true;
 

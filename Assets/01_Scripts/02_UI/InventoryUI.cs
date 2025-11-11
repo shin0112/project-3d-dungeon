@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
+    #region 변수
     [Header("Inventory Settings")]
     [SerializeField] private float _slideDuration = 1f;
     [SerializeField] private float _slideDistance = 700f;
@@ -16,19 +17,20 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Image _arrowButtonImg;
 
     [Header("Item Data")]
-    private ItemSlot[] _slots;
+    private ItemSlot<IEquipment>[] _slots;
 
     [Header("Buff Item Info")]
-    private ItemSlot _buffitem;
+    private ItemSlot<IConsumable> _buffitem;
 
     [Header("Selected Item Info")]
-    private ItemSlot _selectedItem;
+    private ItemSlot<IEquipment> _selectedItem;
     private int _selectedItemIndex;
     [SerializeField] private TextMeshProUGUI _seleectedItemName;
     [SerializeField] private TextMeshProUGUI _seleectedItemDescription;
 
     private PlayerController _controller;
     private PlayerCondition _condition;
+    #endregion
 
     private void Awake()
     {
@@ -48,7 +50,6 @@ public class InventoryUI : MonoBehaviour
         _condition = player.PlayerCondition;
         _controller = player.PlayerController;
 
-        player.AddBuffItem += AddBuffItem;
         player.UseBuffItem += UserBuffItem;
     }
 
@@ -57,6 +58,10 @@ public class InventoryUI : MonoBehaviour
         _arrowButton.onClick.RemoveAllListeners();
     }
 
+    private void OnDestroy()
+    {
+        GameManager.Instance.Player.UseBuffItem -= UserBuffItem;
+    }
     #region 인벤토리 창 세팅
     private void ToggleInventory()
     {
@@ -105,10 +110,9 @@ public class InventoryUI : MonoBehaviour
     /// <summary>
     /// 버프 아이템 슬롯 채우기
     /// </summary>
-    private void AddBuffItem()
+    public void AddBuffItem(ItemData item, IConsumable interfaceType)
     {
-        ItemData item = GameManager.Instance.Player.ItemData;
-        _buffitem.SetItemSlot(item);
+        _buffitem.Set(item, interfaceType);
     }
 
     /// <summary>
@@ -116,7 +120,8 @@ public class InventoryUI : MonoBehaviour
     /// </summary>
     private void UserBuffItem()
     {
-
+        if (_buffitem.IsEmpty()) return;
+        _buffitem.Apply.ApplyEffect();
     }
     #endregion
 }

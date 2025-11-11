@@ -3,8 +3,9 @@ using UnityEngine;
 public class ItemObject : MonoBehaviour, IInteractable
 {
     [SerializeField] private ItemData _data;
-
     private Renderer _renderer;
+
+    public ItemData Data => _data;
 
     private void Awake()
     {
