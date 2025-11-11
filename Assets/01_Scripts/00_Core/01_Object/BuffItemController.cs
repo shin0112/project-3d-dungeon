@@ -26,6 +26,6 @@ public class BuffItemController : MonoBehaviour
 
     private void AutoJump()
     {
-        _rigidbody.AddForce(Vector3.up * Define.BuffItemJumpPower, ForceMode.Impulse);
+        _rigidbody.AddForce(Vector3.up * Define.Item_Buff_JumpPower, ForceMode.Impulse);
     }
 }

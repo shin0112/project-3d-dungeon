@@ -1,12 +1,14 @@
 public static class Define
 {
     #region 플레이어 상태
-    public const float DashStaminaValue = 0.03f;
+    // stamina
+    public const float Player_Stamina_AutoRecoveryRate = 5f;
+    public const float Player_Stamina_DashConsumeRate = 25f;
 
     #endregion
 
     #region 아이템
-    public const float BuffItemSize = 0.3f / 2;
-    public const float BuffItemJumpPower = 5f;
+    public const float Item_Buff_Radius = 0.15f;
+    public const float Item_Buff_JumpPower = 5f;
     #endregion
 }

@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
         _controller.CanSpendStamina = _condition.CurStamina > 0;
         if (_controller.CanSpendStamina)
         {
-            _condition.UseStamina(Time.deltaTime / Define.DashStaminaValue);
+            _condition.UseStamina(Time.deltaTime * Define.Player_Stamina_DashConsumeRate);
         }
     }
 
