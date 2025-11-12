@@ -1,6 +1,9 @@
 public static class Define
 {
     #region 플레이어 상태
+    // speed
+    public const float Player_ClimbSpeed = 3f;
+
     // stamina
     public const float Player_Stamina_AutoRecoveryRate = 5f;
     public const float Player_Stamina_DashConsumeRate = 25f;

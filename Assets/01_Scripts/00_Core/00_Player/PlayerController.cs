@@ -2,6 +2,15 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum PlayerState
+{
+    Idle,
+    Move,
+    Dash,
+    Jump,
+    Climb
+}
+
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
@@ -9,11 +18,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _dashMoveSpeed;
     [SerializeField] private float _jumpPower;
     [SerializeField] private LayerMask _groundLayerMask;
+    [SerializeField] private LayerMask _wallLayerMask;
     private Vector2 _curMovementInput;
 
+    // player state
+    private PlayerState _curState = PlayerState.Idle;
+
     // Dash
-    private bool _isDash = false;
-    public bool IsDash => _isDash;
     public Action OnDash;
 
     // Stmina
@@ -46,18 +57,20 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (IsDash) OnDash?.Invoke();
+        if (_curState == PlayerState.Dash) OnDash?.Invoke();
     }
 
     private void FixedUpdate()
     {
-        if (_isClimb)
+        switch (_curState)
         {
-
-        }
-        else
-        {
-            Move();
+            case PlayerState.Move:
+            case PlayerState.Dash:
+                Move();
+                break;
+            case PlayerState.Climb:
+                Climb();
+                break;
         }
     }
 
@@ -66,16 +79,26 @@ public class PlayerController : MonoBehaviour
         Look();
     }
 
+    #region 플레이어 상태 관리
+    public void ChangePlayerState(PlayerState state)
+    {
+        Logger.Log($"상태 변경 {_curState} -> {state}");
+        _curState = state;
+    }
+
+    #endregion
     #region 플레이어 움직임(Movement)
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
         {
             _curMovementInput = context.ReadValue<Vector2>();
+            ChangePlayerState(PlayerState.Move);
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             _curMovementInput = Vector2.zero;
+            ChangePlayerState(PlayerState.Idle);
         }
     }
 
@@ -89,12 +112,14 @@ public class PlayerController : MonoBehaviour
                 Logger.Log("점프");
                 _rigidbody.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
                 _canJump = false;
+                ChangePlayerState(PlayerState.Jump);
             }
             else if (_canDoubleJump)
             {
                 Logger.Log("더블 점프");
                 _rigidbody.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
                 _canDoubleJump = false;
+                ChangePlayerState(PlayerState.Jump);
             }
         }
     }
@@ -104,18 +129,27 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {
             Logger.Log("대시 시작");
-            _isDash = true;
+            ChangePlayerState(PlayerState.Dash);
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             Logger.Log("대시 취소");
-            _isDash = false;
+            ChangePlayerState(PlayerState.Move);
         }
     }
 
     public void OnClimbInput(InputAction.CallbackContext context)
     {
-        // 나중에 구현
+        if (context.phase == InputActionPhase.Performed)
+        {
+            Logger.Log("등반 시작");
+            ChangePlayerState(PlayerState.Climb);
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            Logger.Log("등반 종료");
+            ChangePlayerState(PlayerState.Move);
+        }
     }
 
     public void SuperJump(float superJumpPower)
@@ -129,10 +163,19 @@ public class PlayerController : MonoBehaviour
         Vector3 direction =
             transform.forward * _curMovementInput.y +
             transform.right * _curMovementInput.x;
-        float speed = (_isDash && CanSpendStamina ? _dashMoveSpeed : _moveSpeed);
-        Logger.Log($"speed: {speed}");
+        float speed = (_curState == PlayerState.Dash && CanSpendStamina ? _dashMoveSpeed : _moveSpeed);
         direction *= speed;
         direction.y = _rigidbody.velocity.y;
+
+        _rigidbody.velocity = direction;
+    }
+
+    private void Climb()
+    {
+        Vector3 direction =
+            transform.up * _curMovementInput.y +
+            transform.right * _curMovementInput.x;
+        direction *= Define.Player_ClimbSpeed;
 
         _rigidbody.velocity = direction;
     }
@@ -157,6 +200,12 @@ public class PlayerController : MonoBehaviour
         }
 
         _canJump = false;
+    }
+
+    private bool IsWall()
+    {
+        Ray ray = new Ray(transform.position + (transform.forward * 0.6f), Vector3.forward);
+        return Physics.Raycast(ray, 0.1f, _wallLayerMask);
     }
 
     private void ResetJumpFlags()
