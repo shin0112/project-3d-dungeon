@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Look")]
     [SerializeField] private Transform _cameraContainer;
+    [SerializeField] private Camera _firstPersonCamera;
+    [SerializeField] private Camera _thirdPersonCamera;
     [SerializeField] private float _minXLook;
     [SerializeField] private float _maxXLook;
     [SerializeField] private float _lookSensitivity;
@@ -154,6 +156,25 @@ public class PlayerController : MonoBehaviour
     public void OnLookInput(InputAction.CallbackContext context)
     {
         _mouseDelta = context.ReadValue<Vector2>();
+    }
+
+    public void OnChangeLookInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            if (_firstPersonCamera.gameObject.activeSelf)
+            {
+                Logger.Log("3인칭 시점으로 변경");
+                _firstPersonCamera.gameObject.SetActive(false);
+                _thirdPersonCamera.gameObject.SetActive(true);
+            }
+            else
+            {
+                Logger.Log("1인칭 시점으로 변경");
+                _firstPersonCamera.gameObject.SetActive(true);
+                _thirdPersonCamera.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void Look()
