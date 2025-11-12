@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
     private bool _canJump = true;
     private bool _canDoubleJump = true;
 
+    // Climb
+    private bool _isClimb = false;
+
     [Header("Look")]
     [SerializeField] private Transform _cameraContainer;
     [SerializeField] private Camera _firstPersonCamera;
@@ -48,7 +51,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (_isClimb)
+        {
+
+        }
+        else
+        {
+            Move();
+        }
     }
 
     private void LateUpdate()
@@ -87,7 +97,6 @@ public class PlayerController : MonoBehaviour
                 _canDoubleJump = false;
             }
         }
-
     }
 
     public void OnDashInput(InputAction.CallbackContext context)
@@ -102,6 +111,11 @@ public class PlayerController : MonoBehaviour
             Logger.Log("대시 취소");
             _isDash = false;
         }
+    }
+
+    public void OnClimbInput(InputAction.CallbackContext context)
+    {
+        // 나중에 구현
     }
 
     public void SuperJump(float superJumpPower)
