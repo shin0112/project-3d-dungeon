@@ -62,10 +62,11 @@ public class InventoryUI : MonoBehaviour
     {
         GameManager.Instance.Player.UseBuffItem -= UserBuffItem;
     }
+
     #region 인벤토리 창 세팅
-    private void ToggleInventory()
+    public void ToggleInventory()
     {
-        Logger.Log("버튼 클릭");
+        Logger.Log("인벤토리 여닫기");
         StopCoroutine(MoveInventoryUI());
         StartCoroutine(MoveInventoryUI());
     }

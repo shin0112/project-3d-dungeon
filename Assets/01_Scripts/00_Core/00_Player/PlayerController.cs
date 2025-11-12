@@ -186,4 +186,15 @@ public class PlayerController : MonoBehaviour
         transform.eulerAngles += new Vector3(0, _mouseDelta.x * _lookSensitivity, 0);
     }
     #endregion
+
+    #region 인벤토리
+    public void OnInventoryInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            Logger.Log("인벤토리 열기");
+            UIManager.Instance.Inventory.ToggleInventory();
+        }
+    }
+    #endregion
 }
