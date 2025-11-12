@@ -16,6 +16,7 @@ public class Stat
     public void NotifyUpdateUI(Action<Stat> updateUI)
     {
         UpdateUI = updateUI;
+        UpdateUI?.Invoke(this);
     }
 
     public void UnNotifyUpdateUI()
@@ -26,7 +27,7 @@ public class Stat
     public void AddValue(float value)
     {
         float minValue = Mathf.Min(Value + value, MaxValue);
-        Logger.Log($"값 변경 {Value} ▶ {minValue}");
+        //Logger.Log($"값 변경 {Value} ▶ {minValue}");
         Value = minValue;
 
         UpdateUI?.Invoke(this);
@@ -35,7 +36,7 @@ public class Stat
     public void SubstactValue(float value)
     {
         float maxValue = Mathf.Max(Value - value, 0);
-        Logger.Log($"값 변경 {Value} ▶ {maxValue}");
+        //Logger.Log($"값 변경 {Value} ▶ {maxValue}");
         Value = maxValue;
 
         UpdateUI?.Invoke(this);
