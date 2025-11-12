@@ -8,10 +8,17 @@ public class JumpPad : MonoBehaviour, IImpactable
     private LayerMask _collisionLayer;
     private bool _canJump = true;
 
+    private Animator _animator;
+
     public void Init(PlayerController controller, LayerMask layerMask)
     {
         _controller = controller;
         _collisionLayer = layerMask;
+    }
+
+    private void Awake()
+    {
+        if (!TryGetComponent(out _animator)) Logger.Log("animator is null");
     }
 
     public void ModifyMovement()
@@ -26,6 +33,7 @@ public class JumpPad : MonoBehaviour, IImpactable
         if (((1 << collision.gameObject.layer) & _collisionLayer) != 0 && _canJump)
         {
             ModifyMovement();
+            _animator.SetTrigger("Jump");
             _canJump = false;
         }
     }
