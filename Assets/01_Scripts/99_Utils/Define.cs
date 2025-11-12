@@ -7,6 +7,7 @@ public static class Define
     // stamina
     public const float Player_Stamina_AutoRecoveryRate = 5f;
     public const float Player_Stamina_DashConsumeRate = 25f;
+    public const float Player_Stamina_ClimbConsumeRate = 35f;
 
     #endregion
 

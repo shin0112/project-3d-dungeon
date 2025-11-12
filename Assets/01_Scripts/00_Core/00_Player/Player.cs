@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -31,25 +32,48 @@ public class Player : MonoBehaviour
     private void EnrollActions()
     {
         _controller.OnDash += HandleDash;
+        _controller.OnClimb += HandleClimb;
     }
 
     private void DeleteActions()
     {
         _controller.OnDash -= HandleDash;
+        _controller.OnClimb -= HandleClimb;
     }
 
-    private void HandleDash()
+    enum StaminaMode
+    {
+        Dash,
+        Climb
+    }
+
+    private Dictionary<StaminaMode, float> _staminaRate = new Dictionary<StaminaMode, float> {
+        { StaminaMode.Dash, Define.Player_Stamina_DashConsumeRate },
+        { StaminaMode.Climb, Define.Player_Stamina_ClimbConsumeRate }
+    };
+
+    private void HandleUseStamina(StaminaMode mode)
     {
         _controller.CanSpendStamina = _condition.CurStamina >= 1 || _condition.HasStaminaBuff;
         if (_controller.CanSpendStamina)
         {
-            _condition.UseStamina(Time.deltaTime * Define.Player_Stamina_DashConsumeRate);
+            _condition.UseStamina(Time.fixedDeltaTime * _staminaRate[mode]);
             Logger.Log("스테미나 사용");
         }
         else
         {
             Logger.Log("스테미나 부족");
         }
+    }
+
+    private void HandleDash()
+    {
+        HandleUseStamina(StaminaMode.Dash);
+    }
+
+    private void HandleClimb()
+    {
+        HandleUseStamina(StaminaMode.Climb);
     }
 
     #region 플레이어 상태 변경

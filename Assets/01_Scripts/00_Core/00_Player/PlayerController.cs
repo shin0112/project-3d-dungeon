@@ -7,6 +7,7 @@ public enum PlayerState
     Idle,
     Move,
     Jump,
+    WallSlide,
     Climb
 }
 
@@ -27,6 +28,9 @@ public class PlayerController : MonoBehaviour
     private bool _isDash = false;
     public Action OnDash;
 
+    // Climb
+    public Action OnClimb;
+
     // Stmina
     public bool CanSpendStamina { get; set; }
 
@@ -34,8 +38,6 @@ public class PlayerController : MonoBehaviour
     private bool _canJump = true;
     private bool _canDoubleJump = true;
 
-    // Climb
-    private bool _isClimb = false;
 
     [Header("Look")]
     [SerializeField] private Transform _cameraContainer;
@@ -55,14 +57,6 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void Update()
-    {
-        if (_isDash)
-        {
-            OnDash?.Invoke();
-        }
-    }
-
     private void FixedUpdate()
     {
         switch (_curState)
@@ -73,6 +67,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Climb:
                 Climb();
+                break;
+            case PlayerState.WallSlide:
+                WallSlide();
                 break;
         }
     }
@@ -109,7 +106,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            CheckGround();
+            IsGrounded();
             if (_canJump)
             {
                 Logger.Log("점프");
@@ -143,7 +140,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnClimbInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Performed && IsWall())
         {
             Logger.Log("등반 시작");
             ChangePlayerState(PlayerState.Climb);
@@ -171,11 +168,22 @@ public class PlayerController : MonoBehaviour
         direction *= speed;
         direction.y = _rigidbody.velocity.y;
 
+        if (IsWall() && !IsGrounded())
+        {
+            ChangePlayerState(PlayerState.WallSlide);
+            return;
+        }
         _rigidbody.velocity = direction;
+
+        if (_isDash) OnDash?.Invoke();
+
     }
 
     private void Climb()
     {
+        OnClimb?.Invoke();
+        if (!CanSpendStamina) return;
+
         Vector3 direction =
             transform.up * _curMovementInput.y +
             transform.right * _curMovementInput.x;
@@ -184,7 +192,24 @@ public class PlayerController : MonoBehaviour
         _rigidbody.velocity = direction;
     }
 
-    private void CheckGround()
+    private void WallSlide()
+    {
+        if (!IsWall())
+        {
+            Logger.Log("벽에서 떨어짐");
+            ChangePlayerState(PlayerState.Jump);
+            return;
+        }
+
+        if (IsGrounded())
+        {
+            Logger.Log("땅에 착지");
+            ChangePlayerState(PlayerState.Move);
+            return;
+        }
+    }
+
+    private bool IsGrounded()
     {
         Ray[] rays = new Ray[4]
         {
@@ -199,17 +224,19 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, 0.1f, _groundLayerMask))
             {
                 ResetJumpFlags();
-                return;
+                return true;
             }
         }
 
         _canJump = false;
+        return false;
     }
 
     private bool IsWall()
     {
-        Ray ray = new Ray(transform.position + (transform.forward * 0.6f), Vector3.forward);
-        return Physics.Raycast(ray, 0.1f, _wallLayerMask);
+        Ray ray = new Ray(transform.position + (transform.up * 1.5f), transform.forward);
+        Debug.DrawRay(ray.origin, ray.direction * 0.3f, Color.red, 1f);
+        return Physics.Raycast(ray, 0.3f, _wallLayerMask);
     }
 
     private void ResetJumpFlags()

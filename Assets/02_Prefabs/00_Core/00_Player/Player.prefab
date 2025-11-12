@@ -364,7 +364,7 @@ MonoBehaviour:
     m_Bits: 64
   _wallLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   _cameraContainer: {fileID: 1297580711683585687}
   _firstPersonCamera: {fileID: 926140434771077063}
   _thirdPersonCamera: {fileID: 2951323582017687841}
