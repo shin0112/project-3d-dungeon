@@ -1,28 +1,28 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemSlot<T> : MonoBehaviour
+public class ItemSlot : MonoBehaviour
 {
     [Header("Item data")]
     [SerializeField] private ItemData _item;
     [SerializeField] private int _index;
-    private T _apply;
+    private IItem _apply;
 
     public ItemData Item => _item;
-    public T Apply => _apply;
+    public IItem Apply => _apply;
 
     [Header("UI")]
-    [SerializeField] private Button _button;
     [SerializeField] private Image _icon;
+    private Button _button;
     private Outline _outline;
 
     private void Awake()
     {
-        _outline = GetComponent<Outline>();
-        _outline.gameObject.SetActive(false);
+        if (!TryGetComponent(out _button)) { Logger.Log("버튼 없음"); }
+        if (!TryGetComponent(out _outline)) { Logger.Log("외곽선 없음"); }
     }
 
-    public void Set(ItemData item, T interfaceType)
+    public void Set(ItemData item, IItem interfaceType)
     {
         _item = item;
         if (item.Type == ItemType.Equipment)

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class SpeedBoost : MonoBehaviour, IConsumable
+public class SpeedBoost : MonoBehaviour, IConsumable, IItem
 {
     private WaitForSeconds _duration = new WaitForSeconds(Define.Item_Buff_Duration_SpeedBoost);
 

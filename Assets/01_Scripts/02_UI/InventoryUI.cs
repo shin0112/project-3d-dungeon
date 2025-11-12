@@ -17,13 +17,13 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Image _arrowButtonImg;
 
     [Header("Item Data")]
-    private ItemSlot<IEquipment>[] _slots;
+    private ItemSlot[] _slots;
 
     [Header("Buff Item Info")]
-    private ItemSlot<IConsumable> _buffitem;
+    private ItemSlot _buffitem;
 
     [Header("Selected Item Info")]
-    private ItemSlot<IEquipment> _selectedItem;
+    private ItemSlot _selectedItem;
     private int _selectedItemIndex;
     [SerializeField] private TextMeshProUGUI _seleectedItemName;
     [SerializeField] private TextMeshProUGUI _seleectedItemDescription;
@@ -111,9 +111,9 @@ public class InventoryUI : MonoBehaviour
     /// <summary>
     /// 버프 아이템 슬롯 채우기
     /// </summary>
-    public void AddBuffItem(ItemData item, IConsumable interfaceType)
+    public void AddItem(ItemData itemData, IItem Item)
     {
-        _buffitem.Set(item, interfaceType);
+        _buffitem.Set(itemData, Item);
     }
 
     /// <summary>
@@ -121,8 +121,9 @@ public class InventoryUI : MonoBehaviour
     /// </summary>
     private void UserBuffItem()
     {
+        IConsumable consumable = _buffitem.Apply as IConsumable;
         if (_buffitem.IsEmpty()) return;
-        _buffitem.Apply.ApplyEffect();
+        consumable.ApplyEffect();
     }
     #endregion
 }

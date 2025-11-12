@@ -1,3 +1,7 @@
+public interface IItem
+{
+}
+
 public interface IConsumable
 {
     public void ApplyEffect();

@@ -7,11 +7,20 @@ public class Stat
     public float MaxValue { get; private set; }
     public Action<Stat> UpdateUI { get; private set; }
 
-    public Stat(float value, float max, Action<Stat> action)
+    public Stat(float value, float max)
     {
         Value = value;
         MaxValue = max;
-        UpdateUI = action;
+    }
+
+    public void NotifyUpdateUI(Action<Stat> updateUI)
+    {
+        UpdateUI = updateUI;
+    }
+
+    public void UnNotifyUpdateUI()
+    {
+        UpdateUI = null;
     }
 
     public void AddValue(float value)
@@ -48,13 +57,22 @@ public class PlayerCondition : MonoBehaviour
     private void Start()
     {
         // todo: 값 저장해서 불러오기
-        _health = new Stat(100, 100, UIManager.Instance.OnHealthChanged);
-        _stamina = new Stat(300, 300, UIManager.Instance.OnStaminaChanged);
+        _health = new Stat(100, 100);
+        _stamina = new Stat(300, 300);
+
+        _health.NotifyUpdateUI(UIManager.Instance.OnHealthChanged);
+        _stamina.NotifyUpdateUI(UIManager.Instance.OnStaminaChanged);
     }
 
     private void Update()
     {
         _stamina.AddValue(Time.deltaTime * Define.Player_Stamina_AutoRecoveryRate);
+    }
+
+    private void OnDestroy()
+    {
+        _health.UnNotifyUpdateUI();
+        _stamina.UnNotifyUpdateUI();
     }
 
     public void Heal(float value)

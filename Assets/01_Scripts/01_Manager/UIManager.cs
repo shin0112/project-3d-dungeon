@@ -1,57 +1,38 @@
 using System;
-using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager
 {
     private static UIManager _instance;
-    public static UIManager Instance => _instance;
+    public static UIManager Instance
+    {
+        get
+        {
+            if (_instance == null) _instance = new();
+            return _instance;
+        }
+    }
 
-    [Header("Player UI")]
-    [SerializeField] private PlayerConditionUI _playerCondition;
-    [SerializeField] private PromptUI _prompt;
-    [SerializeField] private InventoryUI _inventory;
+    private UIManager() { }
+
+    private PlayerConditionUI _playerCondition;
+    private PromptUI _prompt;
+    private InventoryUI _inventory;
     public InventoryUI Inventory => _inventory;
 
-    private bool _isHall = true;
-
-    private void Awake()
+    public void Init(
+        PlayerConditionUI playerCondition,
+        PromptUI prompt,
+        InventoryUI inventory)
     {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        _instance = this;
-        DontDestroyOnLoad(gameObject);
-        GetComponents();
+        _playerCondition = playerCondition;
+        _prompt = prompt;
+        _inventory = inventory;
 
         AddPlayerConditionActions();
         AddPromptActions();
     }
 
-    private void GetComponents()
-    {
-        if (_playerCondition == null)
-        {
-            Logger.Log("player condition ui is null");
-            _playerCondition = GetComponentInChildren<PlayerConditionUI>();
-        }
-
-        if (_prompt == null)
-        {
-            Logger.Log("prompt ui is null");
-            _prompt = GetComponentInChildren<PromptUI>();
-        }
-
-        if (_inventory == null)
-        {
-            Logger.Log("inventory ui is null");
-            _inventory = GetComponentInChildren<InventoryUI>();
-        }
-    }
-
-    private void OnDestroy()
+    public void OnDestroy()
     {
         RemovePlayerConditionActions();
         RemovePromptActions();
