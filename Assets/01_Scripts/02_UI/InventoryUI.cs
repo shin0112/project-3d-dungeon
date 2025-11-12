@@ -34,7 +34,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Awake()
     {
-        if (TryGetComponent(out _rectTransform)) Logger.Log("rect transform is null");
+        if (!TryGetComponent(out _rectTransform)) Logger.Warning("rect transform is null");
     }
 
     private void OnEnable()
@@ -45,7 +45,8 @@ public class InventoryUI : MonoBehaviour
 
     private void Start()
     {
-        Player player = GameManager.Instance.Player;
+        Player player = Managers.Instance.Game.Player;
+        if (player == null) Logger.Warning("player is null");
 
         _condition = player.PlayerCondition;
         _controller = player.PlayerController;

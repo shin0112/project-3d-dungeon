@@ -15,7 +15,7 @@ public class ImpactObjectManager : MonoBehaviour
 
         foreach (var impactable in _impactables)
         {
-            impactable.Init(GameManager.Instance.Player.PlayerController, _layerMask);
+            impactable.Init(Managers.Instance.Game.Player.PlayerController, _layerMask);
         }
 
         Logger.Log($"impactable 리스트 초기화 ({_impactables.Count})");

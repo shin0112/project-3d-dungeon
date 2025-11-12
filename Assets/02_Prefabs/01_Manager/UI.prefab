@@ -1532,7 +1532,6 @@ GameObject:
   - component: {fileID: 5139263943230647645}
   - component: {fileID: 8136403349759713876}
   - component: {fileID: 5422474542080665617}
-  - component: {fileID: 5287742499579562992}
   - component: {fileID: 3484615261797162126}
   m_Layer: 5
   m_Name: Slot_Hand
@@ -1658,21 +1657,6 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 0, b: 0, a: 0.5019608}
   m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
---- !u!114 &5287742499579562992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6933526463430631017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7431563ff658e488fe81323ce92ef3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _item: {fileID: 0}
-  _index: 0
-  _icon: {fileID: 8609794097576190335}
 --- !u!114 &3484615261797162126
 MonoBehaviour:
   m_ObjectHideFlags: 0
