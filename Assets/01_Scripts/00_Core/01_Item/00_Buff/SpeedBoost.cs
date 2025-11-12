@@ -14,8 +14,8 @@ public class SpeedBoost : MonoBehaviour, IConsumable, IItem
 
     private IEnumerator StaminaBoostCoroutine(PlayerCondition playerCondition)
     {
-        playerCondition.BlockSpendStamina = true;
+        playerCondition.HasStaminaBuff = true;
         yield return _duration;
-        playerCondition.BlockSpendStamina = false;
+        playerCondition.HasStaminaBuff = false;
     }
 }

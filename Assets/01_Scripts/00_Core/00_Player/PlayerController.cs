@@ -6,7 +6,6 @@ public enum PlayerState
 {
     Idle,
     Move,
-    Dash,
     Jump,
     Climb
 }
@@ -25,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private PlayerState _curState = PlayerState.Idle;
 
     // Dash
+    private bool _isDash = false;
     public Action OnDash;
 
     // Stmina
@@ -57,7 +57,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (_curState == PlayerState.Dash) OnDash?.Invoke();
+        if (_isDash)
+        {
+            OnDash?.Invoke();
+        }
     }
 
     private void FixedUpdate()
@@ -65,7 +68,7 @@ public class PlayerController : MonoBehaviour
         switch (_curState)
         {
             case PlayerState.Move:
-            case PlayerState.Dash:
+            case PlayerState.Jump:
                 Move();
                 break;
             case PlayerState.Climb:
@@ -129,12 +132,12 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {
             Logger.Log("대시 시작");
-            ChangePlayerState(PlayerState.Dash);
+            _isDash = true;
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             Logger.Log("대시 취소");
-            ChangePlayerState(PlayerState.Move);
+            _isDash = false;
         }
     }
 
@@ -163,7 +166,8 @@ public class PlayerController : MonoBehaviour
         Vector3 direction =
             transform.forward * _curMovementInput.y +
             transform.right * _curMovementInput.x;
-        float speed = (_curState == PlayerState.Dash && CanSpendStamina ? _dashMoveSpeed : _moveSpeed);
+        float speed = (_isDash && CanSpendStamina ? _dashMoveSpeed : _moveSpeed);
+        //Logger.Log($"속도: {speed}");
         direction *= speed;
         direction.y = _rigidbody.velocity.y;
 

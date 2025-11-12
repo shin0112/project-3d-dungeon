@@ -52,14 +52,17 @@ public class PlayerCondition : MonoBehaviour
 
     public float CurHealth => _health.Value;
     public float CurStamina => _stamina.Value;
-    public bool BlockSpendStamina { get; set; } = false;
+    public bool HasStaminaBuff { get; set; } = false;
+
+    private float _stopFillTime = 5f;
+    private bool _isStopFill = false;
     #endregion
 
     private void Start()
     {
         // todo: 값 저장해서 불러오기
         _health = new Stat(100, 100);
-        _stamina = new Stat(300, 300);
+        _stamina = new Stat(30, 100);
 
         _health.NotifyUpdateUI(UIManager.Instance.OnHealthChanged);
         _stamina.NotifyUpdateUI(UIManager.Instance.OnStaminaChanged);
@@ -67,6 +70,8 @@ public class PlayerCondition : MonoBehaviour
 
     private void Update()
     {
+        if (_isStopFill && !HasStaminaBuff) return;
+
         _stamina.AddValue(Time.deltaTime * Define.Player_Stamina_AutoRecoveryRate);
     }
 
@@ -88,6 +93,18 @@ public class PlayerCondition : MonoBehaviour
 
     public void UseStamina(float valuae)
     {
-        if (!BlockSpendStamina) _stamina.SubstactValue(valuae);
+        if (!HasStaminaBuff) _stamina.SubstactValue(valuae);
+
+        if (_stamina.Value < 1f)
+        {
+            _isStopFill = true;
+            Logger.Log("스테미나 회복 일시정지");
+            Invoke("ResetStopFill", _stopFillTime);
+        }
+    }
+
+    private void ResetStopFill()
+    {
+        _isStopFill = false;
     }
 }

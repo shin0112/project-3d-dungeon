@@ -40,10 +40,15 @@ public class Player : MonoBehaviour
 
     private void HandleDash()
     {
-        _controller.CanSpendStamina = _condition.CurStamina > 0;
+        _controller.CanSpendStamina = _condition.CurStamina >= 1 || _condition.HasStaminaBuff;
         if (_controller.CanSpendStamina)
         {
             _condition.UseStamina(Time.deltaTime * Define.Player_Stamina_DashConsumeRate);
+            Logger.Log("스테미나 사용");
+        }
+        else
+        {
+            Logger.Log("스테미나 부족");
         }
     }
 
