@@ -18,8 +18,8 @@ public class ItemSlot : MonoBehaviour
 
     private void Awake()
     {
-        if (!TryGetComponent(out _button)) { Logger.Log("버튼 없음"); }
-        if (!TryGetComponent(out _outline)) { Logger.Log("외곽선 없음"); }
+        if (!TryGetComponent(out _button)) { Logger.Warning("button is null"); }
+        if (!TryGetComponent(out _outline)) { Logger.Warning("outline is null"); }
     }
 
     public void Set(ItemData item, IItem interfaceType)

@@ -22,8 +22,8 @@ public class BuffItemController : MonoBehaviour
         {
             Logger.Log("Item Object is null");
         }
-        if (!TryGetComponent(out _consumable)) Logger.Log("consumable is null");
-        if (!TryGetComponent(out _rigidbody)) Logger.Log("rigid body is null");
+        if (!TryGetComponent(out _consumable)) Logger.Warning("consumable is null");
+        if (!TryGetComponent(out _rigidbody)) Logger.Warning("rigid body is null");
     }
 
     private void OnCollisionEnter(Collision collision)
