@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public Action OnDash;
 
     // Climb
+    private bool _isClimb = false;
     public Action OnClimb;
 
     // Stmina
@@ -64,9 +65,6 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Move:
             case PlayerState.Jump:
                 Move();
-                break;
-            case PlayerState.Climb:
-                Climb();
                 break;
             case PlayerState.WallSlide:
                 WallSlide();
@@ -143,12 +141,12 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Performed && IsWall())
         {
             Logger.Log("등반 시작");
-            ChangePlayerState(PlayerState.Climb);
+            _isClimb = true;
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             Logger.Log("등반 종료");
-            ChangePlayerState(PlayerState.Move);
+            _isClimb = false;
         }
     }
 
@@ -160,34 +158,52 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        if (_isDash) OnDash?.Invoke();
+        if (_isClimb) OnClimb?.Invoke();
+
         Vector3 direction =
-            transform.forward * _curMovementInput.y +
+            (_isClimb ? transform.up : transform.forward) * _curMovementInput.y +
             transform.right * _curMovementInput.x;
-        float speed = (_isDash && CanSpendStamina ? _dashMoveSpeed : _moveSpeed);
+
+        float speed;
+        if (CanSpendStamina)
+        {
+            if (_isDash)
+            {
+                speed = Define.Player_DashSpeed;
+            }
+            else if (_isClimb)
+            {
+                speed = Define.Player_ClimbSpeed;
+            }
+            else
+            {
+                speed = Define.Player_MoveSpeed;
+            }
+        }
+        else
+        {
+            if (_isClimb)
+            {
+                ChangePlayerState(PlayerState.WallSlide);
+                return;
+            }
+            speed = Define.Player_MoveSpeed;
+        }
+
         //Logger.Log($"속도: {speed}");
         direction *= speed;
-        direction.y = _rigidbody.velocity.y;
 
-        if (IsWall() && !IsGrounded())
+        if (!_isClimb)
+        {
+            direction.y = _rigidbody.velocity.y;
+        }
+
+        if (!_isClimb && IsWall() && !IsGrounded())
         {
             ChangePlayerState(PlayerState.WallSlide);
             return;
         }
-        _rigidbody.velocity = direction;
-
-        if (_isDash) OnDash?.Invoke();
-
-    }
-
-    private void Climb()
-    {
-        OnClimb?.Invoke();
-        if (!CanSpendStamina) return;
-
-        Vector3 direction =
-            transform.up * _curMovementInput.y +
-            transform.right * _curMovementInput.x;
-        direction *= Define.Player_ClimbSpeed;
 
         _rigidbody.velocity = direction;
     }
