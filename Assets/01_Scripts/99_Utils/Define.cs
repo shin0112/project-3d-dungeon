@@ -11,6 +11,11 @@ public static class Define
     public const float Player_Stamina_DashConsumeRate = 25f;
     public const float Player_Stamina_ClimbConsumeRate = 35f;
 
+    // animator
+    public const string Player_Anim_Walk = "Move";
+    public const string Player_Anim_Dash = "Dash";
+    public const string Player_Anim_Climb = "Climb";
+
     #endregion
 
     #region 버프 아이템

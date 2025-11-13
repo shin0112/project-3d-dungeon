@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
     private bool _canJump = true;
     private bool _canDoubleJump = true;
 
-
     [Header("Look")]
     [SerializeField] private Transform _cameraContainer;
     [SerializeField] private Camera _firstPersonCamera;
@@ -52,10 +51,12 @@ public class PlayerController : MonoBehaviour
 
     // component cache
     private Rigidbody _rigidbody;
+    private PlayerAnimation _animHandler;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _animHandler = GetComponentInChildren<PlayerAnimation>();
     }
 
     private void FixedUpdate()
@@ -97,6 +98,7 @@ public class PlayerController : MonoBehaviour
         {
             _curMovementInput = Vector2.zero;
             ChangePlayerState(PlayerState.Idle);
+            _animHandler.Idle();
         }
     }
 
@@ -171,6 +173,7 @@ public class PlayerController : MonoBehaviour
             if (_isDash)
             {
                 speed = Define.Player_DashSpeed;
+                _animHandler.Dash();
             }
             else if (_isClimb)
             {
@@ -179,6 +182,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 speed = Define.Player_MoveSpeed;
+                _animHandler.Walk();
             }
         }
         else
@@ -189,6 +193,7 @@ public class PlayerController : MonoBehaviour
                 return;
             }
             speed = Define.Player_MoveSpeed;
+            _animHandler.Walk();
         }
 
         //Logger.Log($"속도: {speed}");
@@ -251,8 +256,8 @@ public class PlayerController : MonoBehaviour
     private bool IsWall()
     {
         Ray ray = new Ray(transform.position + (transform.up * 1.5f), transform.forward);
-        Debug.DrawRay(ray.origin, ray.direction * 0.3f, Color.red, 1f);
-        return Physics.Raycast(ray, 0.3f, _wallLayerMask);
+        Debug.DrawRay(ray.origin, ray.direction * 0.5f, Color.red, 1f);
+        return Physics.Raycast(ray, 0.5f, _wallLayerMask);
     }
 
     private void ResetJumpFlags()
