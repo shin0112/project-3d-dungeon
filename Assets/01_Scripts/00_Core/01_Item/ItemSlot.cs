@@ -11,7 +11,7 @@ public class ItemSlot : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private Image _icon;
-    private Sprite _defaultSprite;
+    [SerializeField] private Sprite _defaultSprite;
     private Button _button;
     private Outline _outline;
 
@@ -19,7 +19,7 @@ public class ItemSlot : MonoBehaviour
     {
         if (!TryGetComponent(out _button)) { Logger.Warning("button is null"); }
         if (!TryGetComponent(out _outline)) { Logger.Warning("outline is null"); }
-        _defaultSprite = _icon.sprite;
+        if (_defaultSprite == null) _defaultSprite = _icon.sprite;
     }
 
     public virtual void Set(ItemData item)

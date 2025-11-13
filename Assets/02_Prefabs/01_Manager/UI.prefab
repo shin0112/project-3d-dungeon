@@ -777,6 +777,7 @@ MonoBehaviour:
   _item: {fileID: 0}
   _index: 3
   _icon: {fileID: 8292585186156195814}
+  _defaultSprite: {fileID: 0}
 --- !u!1 &3606551963072814542
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,6 +1517,7 @@ MonoBehaviour:
   _item: {fileID: 0}
   _index: 2
   _icon: {fileID: 3315551811542911263}
+  _defaultSprite: {fileID: 0}
 --- !u!1 &5687809555722698367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,6 +1671,7 @@ MonoBehaviour:
   _item: {fileID: 0}
   _index: 1
   _icon: {fileID: 4589399375530371323}
+  _defaultSprite: {fileID: 0}
 --- !u!1 &6220924379482275755
 GameObject:
   m_ObjectHideFlags: 0
@@ -2032,6 +2035,7 @@ MonoBehaviour:
   _item: {fileID: 0}
   _index: 0
   _icon: {fileID: 8609794097576190335}
+  _defaultSprite: {fileID: 0}
 --- !u!1 &7871993387853079790
 GameObject:
   m_ObjectHideFlags: 0
@@ -2412,6 +2416,8 @@ MonoBehaviour:
   _item: {fileID: 0}
   _index: 0
   _icon: {fileID: 3421980846035426430}
+  _defaultSprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
+    type: 3}
   _tipText: {fileID: 1683987911495658452}
 --- !u!1 &8902097987151785560
 GameObject:
