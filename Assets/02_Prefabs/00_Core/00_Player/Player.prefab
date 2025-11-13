@@ -4223,9 +4223,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _checkRate: 0.05
   _maxCheckDistance: 3
-  _layerMask:
+  _generalLayerMask:
     serializedVersion: 2
     m_Bits: 33554432
+  _buffItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 67108864
   _curInteractGameObject: {fileID: 0}
 --- !u!1 &7781321850717839622
 GameObject:

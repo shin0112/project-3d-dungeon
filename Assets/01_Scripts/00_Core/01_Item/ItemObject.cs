@@ -9,8 +9,11 @@ public class ItemObject : MonoBehaviour, IInteractable
 
     private void Awake()
     {
-        _renderer = GetComponent<Renderer>();
-        _renderer.material.color = _data.Color;
+        if (_data.Type == ItemType.Consumable)
+        {
+            _renderer = GetComponent<Renderer>();
+            _renderer.material.color = _data.Color;
+        }
     }
 
     public string[] GetInteractPrompt()

@@ -17,6 +17,7 @@ public class UIManager
     private PlayerConditionUI _playerCondition;
     private PromptUI _prompt;
     private InventoryUI _inventory;
+    public PromptUI Prompt => _prompt;
     public InventoryUI Inventory => _inventory;
 
     public void Init(

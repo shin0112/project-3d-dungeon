@@ -15,8 +15,9 @@ GameObject:
   - component: {fileID: 8130304674016831717}
   - component: {fileID: 1944560230686874398}
   - component: {fileID: 7717907877777135818}
-  m_Layer: 25
-  m_Name: Invincibility
+  - component: {fileID: -7433068057090104870}
+  m_Layer: 26
+  m_Name: SpeedBoost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9178dbcdb7ab2d643946270319629d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data: {fileID: 11400000, guid: 3b2e43642c342634fa138a5e2bc14f40, type: 2}
+  _data: {fileID: 11400000, guid: 2652650f275b9924f8aace732fa14353, type: 2}
 --- !u!114 &7717907877777135818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,3 +167,15 @@ MonoBehaviour:
   _playerLayerMask:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &-7433068057090104870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7400147142695229796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2581d0b278c32e438881c40efd16f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

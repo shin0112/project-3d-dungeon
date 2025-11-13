@@ -6,7 +6,8 @@ public class Interaction : MonoBehaviour
     [Header("Check Settings")]
     [SerializeField] private float _checkRate = 0.05f;
     [SerializeField] private float _maxCheckDistance;
-    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private LayerMask _generalLayerMask;
+    [SerializeField] private LayerMask _buffItemLayerMask;
     private float _lastCheckTime;
 
     [Header("Object Interacting")]
@@ -30,12 +31,23 @@ public class Interaction : MonoBehaviour
             Ray ray = _camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, _maxCheckDistance, _layerMask))
+            if (Physics.Raycast(ray, out hit, _maxCheckDistance, _generalLayerMask))
             {
                 if (hit.collider.gameObject != _curInteractGameObject)
                 {
                     _curInteractGameObject = hit.collider.gameObject;
                     _curInteratable = hit.collider.GetComponent<IInteractable>();
+                    Managers.Instance.UI.Prompt.Mode = PromptMode.General;
+                    SetPromptUI();
+                }
+            }
+            else if (Physics.Raycast(ray, out hit, _maxCheckDistance, _buffItemLayerMask))
+            {
+                if (hit.collider.gameObject != _curInteractGameObject)
+                {
+                    _curInteractGameObject = hit.collider.gameObject;
+                    _curInteratable = hit.collider.GetComponent<IInteractable>();
+                    Managers.Instance.UI.Prompt.Mode = PromptMode.Buff;
                     SetPromptUI();
                 }
             }
