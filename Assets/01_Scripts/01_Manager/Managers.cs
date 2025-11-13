@@ -9,6 +9,8 @@ public class Managers : MonoBehaviour
     public GameManager Game => GameManager.Instance;
 
     [SerializeField] private GameObject _playerPrefab;
+    [SerializeField] private BuffEffects _buffEffects;
+    public BuffEffects BuffEffects => _buffEffects;
 
     private void Awake()
     {

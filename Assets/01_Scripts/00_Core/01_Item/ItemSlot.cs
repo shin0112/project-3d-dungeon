@@ -20,7 +20,7 @@ public class ItemSlot : MonoBehaviour
         if (!TryGetComponent(out _outline)) { Logger.Warning("outline is null"); }
     }
 
-    public void Set(ItemData item)
+    public virtual void Set(ItemData item)
     {
         _icon.gameObject.SetActive(true);
         _item = item;

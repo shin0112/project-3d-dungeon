@@ -8,7 +8,6 @@ public class BuffItemController : MonoBehaviour
 
     [Header("Item")]
     private ItemData _data;
-    private IConsumable _consumable;
 
     private Rigidbody _rigidbody;
 
@@ -22,7 +21,6 @@ public class BuffItemController : MonoBehaviour
         {
             Logger.Log("Item Object is null");
         }
-        if (!TryGetComponent(out _consumable)) Logger.Warning("consumable is null");
         if (!TryGetComponent(out _rigidbody)) Logger.Warning("rigid body is null");
     }
 
@@ -34,7 +32,7 @@ public class BuffItemController : MonoBehaviour
         }
         else if (((1 << collision.gameObject.layer & _playerLayerMask) != 0))
         {
-            UIManager.Instance.Inventory.AddBuffItem(_data, _consumable);
+            UIManager.Instance.Inventory.AddBuffItem(_data);
             Destroy(gameObject);
         }
     }
