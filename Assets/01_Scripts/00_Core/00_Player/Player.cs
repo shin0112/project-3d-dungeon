@@ -102,15 +102,35 @@ public class Player : MonoBehaviour
                 case StatType.MaxStamina:
                     _condition.IncreaseMaxStamina(equipValues.Value);
                     break;
+                case StatType.JumpPower:
+                    _controller.BuffJumpPower(equipValues.Value);
+                    break;
                 default:
                     break;
             }
         }
     }
 
-    public void UnEquipHat()
+    public void UnEquipHat(ItemData data)
     {
-
+        // todo: destroy hat object
+        foreach (var equipValues in data.ItemDataEquipments)
+        {
+            switch (equipValues.Type)
+            {
+                case StatType.MaxHealth:
+                    _condition.DecreaseMaxHealth(equipValues.Value);
+                    break;
+                case StatType.MaxStamina:
+                    _condition.DecreaseMaxStamina(equipValues.Value);
+                    break;
+                case StatType.JumpPower:
+                    _controller.ResetJumpPower(equipValues.Value);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
     #endregion
 }

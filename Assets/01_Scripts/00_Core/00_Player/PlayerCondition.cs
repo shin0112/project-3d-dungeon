@@ -45,6 +45,7 @@ public class Stat
     public void IncreaseMaxValue(float value)
     {
         MaxValue += value;
+        UpdateUI?.Invoke(this);
     }
 
     public void DecreaseMaxValue(float value)
@@ -56,6 +57,7 @@ public class Stat
         }
         MaxValue -= value;
         Value = MathF.Min(MaxValue, Value);
+        UpdateUI?.Invoke(this);
     }
 }
 

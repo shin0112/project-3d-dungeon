@@ -85,7 +85,17 @@ public class PlayerController : MonoBehaviour
         _curState = state;
     }
 
+    public void BuffJumpPower(float value)
+    {
+        _jumpPower += value;
+    }
+
+    public void ResetJumpPower(float value)
+    {
+        _jumpPower -= value;
+    }
     #endregion
+
     #region 플레이어 움직임(Movement)
     public void OnMoveInput(InputAction.CallbackContext context)
     {
