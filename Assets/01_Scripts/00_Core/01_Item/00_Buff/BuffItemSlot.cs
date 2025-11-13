@@ -5,7 +5,6 @@ public class BuffItemSlot : ItemSlot
 {
     [SerializeField] private TextMeshProUGUI _tipText;
 
-
     private void Awake()
     {
         _tipText.gameObject.SetActive(false);

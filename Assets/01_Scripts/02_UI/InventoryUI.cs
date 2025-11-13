@@ -156,6 +156,12 @@ public class InventoryUI : MonoBehaviour
         }
 
         Managers.Instance.BuffEffects.ApplyEffect(_buffitem.Item);
+        Invoke("ClearBuffItem", _buffitem.Item.Buff.Value);
+    }
+
+    private void ClearBuffItem()
+    {
+        _buffitem.Clear();
     }
 
     /// <summary>
