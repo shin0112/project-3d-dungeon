@@ -20,7 +20,7 @@ public class InventoryUI : MonoBehaviour
     private ItemSlot[] _slots;
 
     [Header("Buff Item Info")]
-    [SerializeField] private ItemSlot _buffitem;
+    [SerializeField] private BuffItemSlot _buffitem;
 
     [Header("Selected Item Info")]
     private ItemSlot _selectedItem;

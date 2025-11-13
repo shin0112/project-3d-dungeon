@@ -22,7 +22,7 @@ public class ItemSlot : MonoBehaviour
         if (!TryGetComponent(out _outline)) { Logger.Warning("outline is null"); }
     }
 
-    public void Set(ItemData item, IItem interfaceType)
+    public virtual void Set(ItemData item, IItem interfaceType)
     {
         _icon.gameObject.SetActive(true);
         _item = item;
@@ -32,10 +32,13 @@ public class ItemSlot : MonoBehaviour
         Logger.Log($"아이템 슬롯 세팅 완료: {_item.Name}");
     }
 
-    public void Clear()
+    public virtual void Clear()
     {
         _item = null;
         _icon.sprite = null;
+        _apply = null;
+
+        Logger.Log("아이템 슬롯 클리어 완료");
     }
 
     public bool IsEmpty()
