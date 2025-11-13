@@ -22,10 +22,22 @@ public enum EquipmentType
     Shoes
 }
 
+public enum StatType
+{
+    MaxHealth,
+    MaxStamina,
+}
+
 [System.Serializable]
 public class ItemDataConsumable
 {
     public ConsumableType Type { get; }
+    public float Value { get; }
+}
+
+public class ItemDataEquipment
+{
+    public StatType Type { get; }
     public float Value { get; }
 }
 
@@ -53,5 +65,7 @@ public class ItemData : ScriptableObject
 
     [Header("Equipment")]
     [SerializeField] private EquipmentType _equipmentType;
+    [SerializeField] private ItemDataEquipment[] _equipments;
     public EquipmentType EquipmentType { get { return _equipmentType; } }
+    public ItemDataEquipment[] ItemDataEquipments => _equipments;
 }

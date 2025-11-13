@@ -92,6 +92,20 @@ public class Player : MonoBehaviour
     public void EquipHat(ItemData data)
     {
         Instantiate(data.DropPrefab, _hat.transform);
+        foreach (var equipValues in data.ItemDataEquipments)
+        {
+            switch (equipValues.Type)
+            {
+                case StatType.MaxHealth:
+                    _condition.IncreaseMaxHealth(equipValues.Value);
+                    break;
+                case StatType.MaxStamina:
+                    _condition.IncreaseMaxStamina(equipValues.Value);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     public void UnEquipHat()

@@ -41,6 +41,22 @@ public class Stat
 
         UpdateUI?.Invoke(this);
     }
+
+    public void IncreaseMaxValue(float value)
+    {
+        MaxValue += value;
+    }
+
+    public void DecreaseMaxValue(float value)
+    {
+        if (MaxValue < value)
+        {
+            Logger.Log("최대치보다 큰 값을 줄일 수 없음");
+            return;
+        }
+        MaxValue -= value;
+        Value = MathF.Min(MaxValue, Value);
+    }
 }
 
 
@@ -101,6 +117,25 @@ public class PlayerCondition : MonoBehaviour
             Logger.Log("스테미나 회복 일시정지");
             Invoke("ResetStopFill", _stopFillTime);
         }
+    }
+
+    public void IncreaseMaxHealth(float value)
+    {
+        _health.IncreaseMaxValue(value);
+    }
+
+    public void DecreaseMaxHealth(float value)
+    {
+        _health.DecreaseMaxValue(value);
+    }
+    public void IncreaseMaxStamina(float value)
+    {
+        _stamina.IncreaseMaxValue(value);
+    }
+
+    public void DecreaseMaxStamina(float value)
+    {
+        _stamina.DecreaseMaxValue(value);
     }
 
     private void ResetStopFill()
