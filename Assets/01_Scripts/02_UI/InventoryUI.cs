@@ -17,7 +17,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Image _arrowButtonImg;
 
     [Header("Item Data")]
-    private ItemSlot[] _slots;
+    [SerializeField] private ItemSlot[] _slots;
 
     [Header("Buff Item Info")]
     [SerializeField] private BuffItemSlot _buffitem;
@@ -112,12 +112,23 @@ public class InventoryUI : MonoBehaviour
 
     #region 인벤토리 슬롯 세팅
     /// <summary>
+    /// 장비 아이템 슬롯 채우기
+    /// </summary>
+    /// <param name="data"></param>
+    public void AddEquipmentItem(ItemData data)
+    {
+        Logger.Log("일반 아이템 획득");
+        // public enum EquipmentType { None, Hand, Hat, Top, Shoes }
+        _slots[(int)data.EquipmentType - 1].Set(data);
+    }
+
+    /// <summary>
     /// 버프 아이템 슬롯 채우기
     /// </summary>
     public void AddBuffItem(ItemData itemData, IItem Item)
     {
         Logger.Log("버프 아이템 획득");
-        if (_buffitem.Item != null)
+        if (!_buffitem.IsEmpty())
         {
             Logger.Log("기존 버프 아이템 교체");
             ThrowItem(_buffitem.Item);

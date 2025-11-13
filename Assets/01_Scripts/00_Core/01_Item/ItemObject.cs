@@ -23,6 +23,8 @@ public class ItemObject : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
-        throw new System.NotImplementedException();
+        if (_data.Type == ItemType.Consumable && _data.ConsumableType == ConsumableType.Buff) return;
+
+        UIManager.Instance.Inventory.AddEquipmentItem(_data);
     }
 }

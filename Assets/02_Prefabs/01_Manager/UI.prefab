@@ -775,7 +775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
   _index: 3
-  _icon: {fileID: 6687114338108955206}
+  _icon: {fileID: 8292585186156195814}
 --- !u!1 &3606551963072814542
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,6 +1355,11 @@ MonoBehaviour:
   _slideDistance: 700
   _arrowButton: {fileID: 6923647138060644251}
   _arrowButtonImg: {fileID: 4373203181212724615}
+  _slots:
+  - {fileID: 3484615261797162126}
+  - {fileID: 2409544047530357794}
+  - {fileID: 4088258562218887148}
+  - {fileID: 6129283320057736467}
   _buffitem: {fileID: 7870232441309732527}
   _seleectedItemName: {fileID: 0}
   _seleectedItemDescription: {fileID: 0}
@@ -1663,7 +1668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
   _index: 1
-  _icon: {fileID: 3315551811542911263}
+  _icon: {fileID: 4589399375530371323}
 --- !u!1 &6220924379482275755
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,7 +2031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
   _index: 0
-  _icon: {fileID: 0}
+  _icon: {fileID: 8609794097576190335}
 --- !u!1 &7871993387853079790
 GameObject:
   m_ObjectHideFlags: 0
