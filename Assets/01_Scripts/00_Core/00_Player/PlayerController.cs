@@ -321,5 +321,14 @@ public class PlayerController : MonoBehaviour
             UIManager.Instance.Inventory.ToggleInventory();
         }
     }
+
+    public void OnUseItemInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            Logger.Log("버프 아이템 사용");
+            Managers.Instance.Game.Player?.UseBuffItem();
+        }
+    }
     #endregion
 }

@@ -53,7 +53,7 @@ public class InventoryUI : MonoBehaviour
         _controller = player.PlayerController;
         _dropPosition = player.DropPosition;
 
-        player.UseBuffItem += UserBuffItem;
+        player.UseBuffItem += UseBuffItem;
     }
 
     private void OnDisable()
@@ -63,7 +63,7 @@ public class InventoryUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.Instance.Player.UseBuffItem -= UserBuffItem;
+        GameManager.Instance.Player.UseBuffItem -= UseBuffItem;
     }
 
     #region 인벤토리 창 세팅
@@ -139,10 +139,14 @@ public class InventoryUI : MonoBehaviour
     /// <summary>
     /// 버프 아이템 사용하기
     /// </summary>
-    private void UserBuffItem()
+    private void UseBuffItem()
     {
         IConsumable consumable = _buffitem.Apply as IConsumable;
-        if (_buffitem.IsEmpty()) return;
+        if (_buffitem.IsEmpty())
+        {
+            Logger.Log("버프 아이템 없음");
+            return;
+        }
         consumable.ApplyEffect();
     }
 
