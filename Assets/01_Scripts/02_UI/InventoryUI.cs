@@ -20,7 +20,7 @@ public class InventoryUI : MonoBehaviour
     private ItemSlot[] _slots;
 
     [Header("Buff Item Info")]
-    private ItemSlot _buffitem;
+    [SerializeField] private ItemSlot _buffitem;
 
     [Header("Selected Item Info")]
     private ItemSlot _selectedItem;
@@ -114,6 +114,7 @@ public class InventoryUI : MonoBehaviour
     /// </summary>
     public void AddItem(ItemData itemData, IItem Item)
     {
+        Logger.Log("버프 아이템 획득");
         _buffitem.Set(itemData, Item);
     }
 

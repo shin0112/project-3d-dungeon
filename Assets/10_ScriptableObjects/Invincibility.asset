@@ -15,9 +15,10 @@ MonoBehaviour:
   _name: Invincibility
   _description: "\uBB34\uC801"
   _type: 0
-  _icon: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  _dropPrefab: {fileID: 7400147142695229796, guid: 63d6e2a2da942b34f8254648e85498da, type: 3}
-  _color: {r: 0.16661978, g: 0, b: 1, a: 0}
+  _icon: {fileID: 21300000, guid: e12e1a0e4a7453c42932e826264d0473, type: 3}
+  _dropPrefab: {fileID: 7400147142695229796, guid: 63d6e2a2da942b34f8254648e85498da,
+    type: 3}
+  _color: {r: 1, g: 0, b: 0, a: 0}
   _consumableType: 2
   _consumables: []
   _equipmentType: 0

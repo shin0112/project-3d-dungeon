@@ -24,12 +24,12 @@ public class ItemSlot : MonoBehaviour
 
     public void Set(ItemData item, IItem interfaceType)
     {
+        _icon.gameObject.SetActive(true);
         _item = item;
-        if (item.Type == ItemType.Equipment)
-        {
-            _icon.sprite = item.Icon;
-        }
+        _icon.sprite = item.Icon;
         _apply = interfaceType;
+
+        Logger.Log($"아이템 슬롯 세팅 완료: {_item.Name}");
     }
 
     public void Clear()

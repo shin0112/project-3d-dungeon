@@ -16,9 +16,10 @@ MonoBehaviour:
   _description: "\uC2A4\uD14C\uBBF8\uB108 \uC18C\uBAA8 \uC5C6\uC774 \uB300\uC2DC\uAC00
     \uAC00\uB2A5\uD569\uB2C8"
   _type: 0
-  _icon: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  _dropPrefab: {fileID: 7400147142695229796, guid: 66718bd2b8928b94f8d9e6214a4f6abb, type: 3}
-  _color: {r: 1, g: 0, b: 0, a: 0}
+  _icon: {fileID: 21300000, guid: 43046426625693b41b1c2ee199d4c15a, type: 3}
+  _dropPrefab: {fileID: 7400147142695229796, guid: 66718bd2b8928b94f8d9e6214a4f6abb,
+    type: 3}
+  _color: {r: 0, g: 0.23110771, b: 1, a: 0}
   _consumableType: 2
   _consumables: []
   _equipmentType: 0
