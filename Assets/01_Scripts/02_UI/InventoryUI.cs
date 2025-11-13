@@ -133,7 +133,7 @@ public class InventoryUI : MonoBehaviour
     /// <summary>
     /// 버프 아이템 슬롯 채우기
     /// </summary>
-    public void AddBuffItem(ItemData itemData, IConsumable Item)
+    public void AddBuffItem(ItemData itemData)
     {
         Logger.Log("버프 아이템 획득");
         if (!_buffitem.IsEmpty())
@@ -141,7 +141,7 @@ public class InventoryUI : MonoBehaviour
             Logger.Log("기존 버프 아이템 교체");
             ThrowItem(_buffitem.Item);
         }
-        _buffitem.Set(itemData, Item);
+        _buffitem.Set(itemData);
     }
 
     /// <summary>
@@ -149,13 +149,13 @@ public class InventoryUI : MonoBehaviour
     /// </summary>
     private void UseBuffItem()
     {
-        IConsumable consumable = _buffitem.Apply as IConsumable;
         if (_buffitem.IsEmpty())
         {
             Logger.Log("버프 아이템 없음");
             return;
         }
-        consumable.ApplyEffect();
+
+        Managers.Instance.BuffEffects.ApplyEffect(_buffitem.Item);
     }
 
     /// <summary>
