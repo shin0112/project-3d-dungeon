@@ -43,6 +43,7 @@ public class ItemData : ScriptableObject
     public string Description => _description;
     public ItemType Type => _type;
     public Sprite Icon => _icon;
+    public GameObject DropPrefab => _dropPrefab;
     public Color Color => _color;
 
     [Header("Consumable")]

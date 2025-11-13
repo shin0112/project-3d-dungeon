@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 
     [Header("Item")]
     [SerializeField] private Transform _dropPosition;
+    public Transform DropPosition => _dropPosition;
     public ItemData ItemData { get; set; }
     public Action AddBuffItem;
     public Action UseBuffItem;

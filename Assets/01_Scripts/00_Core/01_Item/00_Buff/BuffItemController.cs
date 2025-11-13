@@ -34,7 +34,7 @@ public class BuffItemController : MonoBehaviour
         }
         else if (((1 << collision.gameObject.layer & _playerLayerMask) != 0))
         {
-            UIManager.Instance.Inventory.AddItem(_data, _consumable);
+            UIManager.Instance.Inventory.AddBuffItem(_data, _consumable);
             Destroy(gameObject);
         }
     }

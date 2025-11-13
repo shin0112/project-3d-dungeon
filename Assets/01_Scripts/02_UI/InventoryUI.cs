@@ -30,6 +30,7 @@ public class InventoryUI : MonoBehaviour
 
     private PlayerController _controller;
     private PlayerCondition _condition;
+    private Transform _dropPosition;
     #endregion
 
     private void Awake()
@@ -50,6 +51,7 @@ public class InventoryUI : MonoBehaviour
 
         _condition = player.PlayerCondition;
         _controller = player.PlayerController;
+        _dropPosition = player.DropPosition;
 
         player.UseBuffItem += UserBuffItem;
     }
@@ -112,9 +114,14 @@ public class InventoryUI : MonoBehaviour
     /// <summary>
     /// 버프 아이템 슬롯 채우기
     /// </summary>
-    public void AddItem(ItemData itemData, IItem Item)
+    public void AddBuffItem(ItemData itemData, IItem Item)
     {
         Logger.Log("버프 아이템 획득");
+        if (_buffitem.Item != null)
+        {
+            Logger.Log("기존 버프 아이템 교체");
+            ThrowItem(_buffitem.Item);
+        }
         _buffitem.Set(itemData, Item);
     }
 
@@ -126,6 +133,15 @@ public class InventoryUI : MonoBehaviour
         IConsumable consumable = _buffitem.Apply as IConsumable;
         if (_buffitem.IsEmpty()) return;
         consumable.ApplyEffect();
+    }
+
+    /// <summary>
+    /// 아이템 버리기
+    /// </summary>
+    /// <param name="itemData"></param>
+    private void ThrowItem(ItemData itemData)
+    {
+        Instantiate(itemData.DropPrefab, _dropPosition.position, Quaternion.Euler(Vector3.one * Random.value * 360));
     }
     #endregion
 }
