@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1944560230686874398}
   - component: {fileID: 7717907877777135818}
   m_Layer: 26
-  m_Name: Invincibility
+  m_Name: InfiniteStamina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

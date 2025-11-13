@@ -13,6 +13,13 @@ public enum ConsumableType
     Buff
 }
 
+public enum BuffType
+{
+    InfiniteStamina,
+    SpeedBoost,
+    HighJump,
+}
+
 public enum EquipmentType
 {
     None,
@@ -35,6 +42,15 @@ public class ItemDataConsumable
     [SerializeField] private ConsumableType _type;
     [SerializeField] private float _value;
     public ConsumableType Type => _type;
+    public float Value => _value;
+}
+
+[System.Serializable]
+public class ItemDataBuff
+{
+    [SerializeField] private BuffType _type;
+    [SerializeField] private float _value;
+    public BuffType Type => _type;
     public float Value => _value;
 }
 
@@ -68,6 +84,10 @@ public class ItemData : ScriptableObject
     [SerializeField] private ConsumableType _consumableType;
     [SerializeField] private ItemDataConsumable[] _consumables;
     public ConsumableType ConsumableType { get { return _consumableType; } }
+
+    [Header("Buff")]
+    [SerializeField] private ItemDataBuff _buff;
+    public ItemDataBuff Buff => _buff;
 
     [Header("Equipment")]
     [SerializeField] private EquipmentType _equipmentType;

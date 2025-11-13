@@ -119,13 +119,21 @@ public class InventoryUI : MonoBehaviour
     {
         Logger.Log("일반 아이템 획득");
         // public enum EquipmentType { None, Hand, Hat, Top, Shoes }
-        _slots[(int)data.EquipmentType - 1].Set(data);
+        var targetSlot = _slots[(int)data.EquipmentType - 1];
+
+        if (!targetSlot.IsEmpty())
+        {
+            Logger.Log("기존 아이템 제거");
+            Managers.Instance.Game.Player.UnEquipHat(targetSlot.Item);
+        }
+
+        targetSlot.Set(data);
     }
 
     /// <summary>
     /// 버프 아이템 슬롯 채우기
     /// </summary>
-    public void AddBuffItem(ItemData itemData, IItem Item)
+    public void AddBuffItem(ItemData itemData, IConsumable Item)
     {
         Logger.Log("버프 아이템 획득");
         if (!_buffitem.IsEmpty())
