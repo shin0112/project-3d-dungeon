@@ -113,7 +113,6 @@ public class Player : MonoBehaviour
 
     public void UnEquipHat(ItemData data)
     {
-        // todo: destroy hat object
         foreach (var equipValues in data.ItemDataEquipments)
         {
             switch (equipValues.Type)
@@ -130,6 +129,11 @@ public class Player : MonoBehaviour
                 default:
                     break;
             }
+        }
+
+        foreach (Transform child in _hat.transform)
+        {
+            Destroy(child.gameObject);
         }
     }
     #endregion
