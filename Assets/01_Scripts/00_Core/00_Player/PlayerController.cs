@@ -94,6 +94,18 @@ public class PlayerController : MonoBehaviour
     {
         _jumpPower -= value;
     }
+
+    public void BuffSpped(float value)
+    {
+        _moveSpeed *= value;
+        _dashMoveSpeed *= value;
+    }
+
+    public void ResetSpeed(float value)
+    {
+        _moveSpeed /= value;
+        _dashMoveSpeed /= value;
+    }
     #endregion
 
     #region 플레이어 움직임(Movement)

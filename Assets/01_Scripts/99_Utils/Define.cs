@@ -22,6 +22,6 @@ public static class Define
     public const float Item_Buff_Radius = 0.15f;
     public const float Item_Buff_JumpPower = 5f;
 
-    public const float Item_Buff_Duration_SpeedBoost = 3f;
+    public const float Item_Buff_Duration = 5f;
     #endregion
 }
