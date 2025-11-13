@@ -8,7 +8,7 @@ public class BuffItemController : MonoBehaviour
 
     [Header("Item")]
     private ItemData _data;
-    private IItem _consumable;
+    private IConsumable _consumable;
 
     private Rigidbody _rigidbody;
 

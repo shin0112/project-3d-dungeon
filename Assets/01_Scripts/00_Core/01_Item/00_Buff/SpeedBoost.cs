@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class SpeedBoost : MonoBehaviour, IConsumable, IItem
+public class SpeedBoost : MonoBehaviour, IConsumable
 {
     private WaitForSeconds _duration = new WaitForSeconds(Define.Item_Buff_Duration_SpeedBoost);
 
@@ -17,5 +17,6 @@ public class SpeedBoost : MonoBehaviour, IConsumable, IItem
         playerCondition.HasStaminaBuff = true;
         yield return _duration;
         playerCondition.HasStaminaBuff = false;
+        Destroy(gameObject);
     }
 }

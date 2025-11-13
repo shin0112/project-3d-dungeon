@@ -4,15 +4,15 @@ using UnityEngine;
 public class BuffItemSlot : ItemSlot
 {
     [SerializeField] private TextMeshProUGUI _tipText;
-    private IItem _apply;
-    public IItem Apply => _apply;
+    private IConsumable _apply;
+    public IConsumable Apply => _apply;
 
     private void Awake()
     {
         _tipText.gameObject.SetActive(false);
     }
 
-    public void Set(ItemData item, IItem interfaceType)
+    public void Set(ItemData item, IConsumable interfaceType)
     {
         base.Set(item);
         _apply = interfaceType;
