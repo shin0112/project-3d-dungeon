@@ -105,8 +105,8 @@ TagManager:
   - Camera
   - Water
   - UI
-  - 
-  - 
+  - Ground
+  - Wall
   - Player
   - Enemy
   - CompanionAI
