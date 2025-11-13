@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 372cb05943e1085438592f04bbe4f812, type: 3}
+  m_Name: Hat_Frog
+  m_EditorClassIdentifier: 
+  _name: "\uAC1C\uAD6C\uB9AC \uBAA8\uC790"
+  _description: "\uAC1C\uAD6C\uB9AC\uCC98\uB7FC \uB192\uAC8C \uC810\uD504\uD560 \uC218
+    \uC788\uAC8C \uB41C\uB2E4."
+  _type: 1
+  _icon: {fileID: 21300000, guid: 4c376194a10344f449bab91a148a89a2, type: 3}
+  _dropPrefab: {fileID: 7577297214712661256, guid: d2b4919d95f4c514e8f92474f675ab76,
+    type: 3}
+  _color: {r: 0, g: 0, b: 0, a: 0}
+  _consumableType: 0
+  _consumables: []
+  _equipmentType: 2
