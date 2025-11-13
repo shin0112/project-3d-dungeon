@@ -26,19 +26,25 @@ public enum StatType
 {
     MaxHealth,
     MaxStamina,
+    JumpPower,
 }
 
 [System.Serializable]
 public class ItemDataConsumable
 {
-    public ConsumableType Type { get; }
-    public float Value { get; }
+    [SerializeField] private ConsumableType _type;
+    [SerializeField] private float _value;
+    public ConsumableType Type => _type;
+    public float Value => _value;
 }
 
+[System.Serializable]
 public class ItemDataEquipment
 {
-    public StatType Type { get; }
-    public float Value { get; }
+    [SerializeField] private StatType _type;
+    [SerializeField] private float _value;
+    public StatType Type => _type;
+    public float Value => _value;
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "New Item")]
