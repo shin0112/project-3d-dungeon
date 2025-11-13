@@ -23,3 +23,6 @@ MonoBehaviour:
   _consumableType: 0
   _consumables: []
   _equipmentType: 2
+  _equipments:
+  - _type: 1
+    _value: 50
