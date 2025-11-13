@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &419013362163533093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4525974153827091719}
+  m_Layer: 0
+  m_Name: Hat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4525974153827091719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419013362163533093}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4963252170366031139}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2071866685811665022
 GameObject:
   m_ObjectHideFlags: 0
@@ -4170,6 +4201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dropPosition: {fileID: 4713960146072245800}
+  _hat: {fileID: 419013362163533093}
 --- !u!114 &1391152533685260191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4261,6 +4293,7 @@ Transform:
   m_Children:
   - {fileID: 3123878214424937927}
   - {fileID: 3032519572395198764}
+  - {fileID: 4525974153827091719}
   m_Father: {fileID: 694624400942324010}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8518697832811759079

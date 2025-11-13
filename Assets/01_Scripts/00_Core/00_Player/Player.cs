@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     public Action AddBuffItem;
     public Action UseBuffItem;
 
+    [Header("Equipment")]
+    [SerializeField] private GameObject _hat;
+
     private void Awake()
     {
         _controller = GetComponent<PlayerController>();
@@ -30,6 +33,7 @@ public class Player : MonoBehaviour
         DeleteActions();
     }
 
+    #region 플레이어 움직임 & 상태 관리 및 상호작용
     private void EnrollActions()
     {
         _controller.OnDash += HandleDash;
@@ -76,10 +80,23 @@ public class Player : MonoBehaviour
     {
         HandleUseStamina(StaminaMode.Climb);
     }
+    #endregion
 
     #region 플레이어 상태 변경
     public void Heal(float value) => _condition.Heal(value);
 
     public void Damage(float value) => _condition.Damage(value);
+    #endregion
+
+    #region 플레이어 장비
+    public void EquipHat(ItemData data)
+    {
+        Instantiate(data.DropPrefab, _hat.transform);
+    }
+
+    public void UnEquipHat()
+    {
+
+    }
     #endregion
 }

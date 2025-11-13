@@ -25,6 +25,10 @@ public class ItemObject : MonoBehaviour, IInteractable
     {
         if (_data.Type == ItemType.Consumable && _data.ConsumableType == ConsumableType.Buff) return;
 
-        UIManager.Instance.Inventory.AddEquipmentItem(_data);
+        if (_data.Type == ItemType.Equipment)
+        {
+            UIManager.Instance.Inventory.AddEquipmentItem(_data);
+            Managers.Instance.Game.Player.EquipHat(_data);
+        }
     }
 }
