@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1944560230686874398}
   - component: {fileID: 7717907877777135818}
   - component: {fileID: -7433068057090104870}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: SpeedBoost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
