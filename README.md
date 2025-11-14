@@ -73,14 +73,14 @@
 - 점프, 이단 점프 (Space)
 - 대시 (C) - 스테미나 소모
 
-<video autoplay muted loop width="640" height="360" src="Docs/Video/Movement.mp4"></video>
+![Movement](Docs\Img\Movement.gif)
 
 ### 2. 시점 변경
 
 - F5로 1인칭 ↔ 3인칭 전환
 - 카메라 회전(마우스 Look)
 
-<video autoplay muted loop width="640" height="360" src="Docs/Video/ChangePerspective.mp4"></video>
+![ChangePerspective](Docs\Img\ChangePerspective.gif)
 
 ### 3. 인벤토리
 
@@ -88,7 +88,7 @@
 - 슬롯 UI 표시
 - 아이템 상태 반영
 
-<video autoplay muted loop width="640" height="360" src="Docs/Video/ToggleInventory.mp4"></video>
+![ToggleInventory](Docs\Img\ToggleInventory.gif)
 
 ### 4. 아이템
 
@@ -96,8 +96,8 @@
 - 버프 아이템 사용 (Q)
 - 능력치 변화 적용
 
-<video autoplay muted loop width="640" height="360" src="Docs/Video/EquipItem.mp4"></video>
-<video autoplay muted loop width="640" height="360" src="Docs/Video/BuffItem.mp4"></video>
+![EquipItem](Docs\Img\EquipItem.gif)
+![BuffItem](Docs\Img\BuffItem.gif)
 
 ### 5. 환경 상호작용
 
@@ -106,7 +106,7 @@
 - 벽 타기
   - `Raycast`로 벽 감지
 
-<video autoplay muted loop width="640" height="360" src="Docs/Video/JumpAndClimb.mp4"></video>
+![JumpAndClimb](Docs\Img\JumpAndClimb.gif)
 
 ## [트러블슈팅]
 
